@@ -2,12 +2,12 @@
  * Copyright October 2020: Georg Pohl, 70174 Stuttgart
  * File: ganylogs.c
  * ----------------
- * This program can be used to find unknown syslog messages,
- * when you introduce a new router software. It is meant to
- * be used durch den Product Validation (PV) time only.
- * Therefore you feed the program with the router hostnames,
- * so that it can browse through the recent logfile and grep
- * out every syslog message of the before defined hosts.
+ * This program can be used to identify unknown syslog
+ * messages, when you introduce a new router software. It is
+ * meant to be used durch den Product Validation (PV) time only.
+ * Therefore you feed the program with the involved router
+ * hostnames, so that it can browse through the recent logfile
+ * and grep out every syslog message of the before defined hosts.
  *
  * Every message is then compared with the 'blacklist'- and
  * a 'whitelist' file.
