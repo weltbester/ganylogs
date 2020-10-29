@@ -41,49 +41,71 @@
 /* STRUCTS */
 
 /* PROTOTYPES */
-int menu();
+void enterHostnames();
 
 int main(int argc, const char **argv) {
     int choice = 0;
+    // char hosts[5][9]; // noch Implementierung prüfen!!
     printf("\n\tGANYLOGS: FILTERING TOOL FOR NEW SYSLOG MESSAGES\n");
-    printf("\t---------------------------------------------------\n\n");
-    
-    while (choice != 5) {
+    printf("\t-------------------------------------------------\n\n");
+
+    do {
+        printf("\t-1- Enter hostname\n");
+        printf("\t-2- Create cronjob\n");
+        printf("\t-3- Enter syslog signature to 'blacklist'\n");
+        printf("\t-4- Enter syslog signature to 'whitelist'\n");
+        printf("\t-5- Quit\n\n");
+
+        printf("Your choice: ");
+        if ( (scanf("%d", &choice) != 1) ) {
+            printf("Fehler bei der Eingabe");
+            return 1;
+        }
+
         // Switch Anweisung
         switch (choice) {
-            case 1:
+            case 1: enterHostnames();   // Enter hostname
             break;
-            case 2:
+            case 2: // Create cronjob
             break;
-            case 3:
+            case 3: // Enter syslog signature to 'blacklist'
             break;
-            case 4:
+            case 4: // Enter syslog signature to 'whitelist'
             break;
             case 5: printf("Bye!\n");
             break;
             default:
             break;
         }
-        choice = menu();
-    }
-    
+    }while (choice != 5);
 
   return EXIT_SUCCESS;
 }
 
 /* FUNCTIONS */
-int menu() {
-    int input;
-    printf("\t-1- Enter hostname\n");
-    printf("\t-2- Create cronjob\n");
-    printf("\t-3- Enter syslog signature to 'blacklist'\n");
-    printf("\t-4- Enter syslog signature to 'whitelist'\n");
-    printf("\t-5- Quit\n\n");
-
-    printf("Your choice: ");
-    if ( (scanf("%d", &input) != 1) ) {
-        printf("Fehler bei der Eingabe");
+void enterHostnames() {
+    char hosts[5][9];
+    int nHosts = 0;
+    printf("Enter the number of routers (<=5): ");
+    if ( (scanf("%d", &nHosts) == 0)) {
+        printf("Input Error!\n");
+        exit(1);
     }
-    fflush(stdin);
-    return input;
+    for (int i=0; i < nHosts; ++i) {
+        printf("%d. Routername: ", i+1);
+        if ( (scanf("%s[^\n]", hosts[i]) == 0)) {
+            printf("Input Error!\n");
+            exit(1);
+        }
+    }
+    printf("\nAdded routers: ");
+    printf("[");
+    for (int i=0; i < nHosts; ++i) {
+        if (i == 0) {
+            printf("%s", hosts[i]);
+        } else {
+            printf(", %s", hosts[i]);
+        }
+    }
+    printf("]\n\n");
 }
