@@ -41,11 +41,49 @@
 /* STRUCTS */
 
 /* PROTOTYPES */
-
+int menu();
 
 int main(int argc, const char **argv) {
+    int choice = 0;
+    printf("\n\tGANYLOGS: FILTERING TOOL FOR NEW SYSLOG MESSAGES\n");
+    printf("\t---------------------------------------------------\n\n");
+    
+    while (choice != 5) {
+        // Switch Anweisung
+        switch (choice) {
+            case 1:
+            break;
+            case 2:
+            break;
+            case 3:
+            break;
+            case 4:
+            break;
+            case 5: printf("Bye!\n");
+            break;
+            default:
+            break;
+        }
+        choice = menu();
+    }
+    
 
   return EXIT_SUCCESS;
 }
 
 /* FUNCTIONS */
+int menu() {
+    int input;
+    printf("\t-1- Enter hostname\n");
+    printf("\t-2- Create cronjob\n");
+    printf("\t-3- Enter syslog signature to 'blacklist'\n");
+    printf("\t-4- Enter syslog signature to 'whitelist'\n");
+    printf("\t-5- Quit\n\n");
+
+    printf("Your choice: ");
+    if ( (scanf("%d", &input) != 1) ) {
+        printf("Fehler bei der Eingabe");
+    }
+    fflush(stdin);
+    return input;
+}
