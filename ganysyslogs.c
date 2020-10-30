@@ -1,7 +1,7 @@
 /** 
  * Copyright October 2020: Georg Pohl, 70174 Stuttgart
- * File: ganylogs.c
- * ----------------
+ * File: ganysyslogs.c
+ * -------------------
  * This program can be used to identify unknown syslog
  * messages, when you introduce a new router software. It is
  * meant to be used durch den Product Validation (PV) time only.
@@ -49,8 +49,8 @@ int main(int argc, const char **argv) {
     char *routers = NULL;
     int choice = 0, nHosts = 0;
     // char *hosts[9]; // noch Implementierung prüfen!!
-    printf("\n\tGANYLOGS: TOOL TO IDENTIFY NEW SYSLOG MESSAGES\n");
-    printf("\t----------------------------------------------\n");
+    printf("\n\tGANYSYSLOGS: TOOL TO IDENTIFY NEW SYSLOG MESSAGES\n");
+    printf("\t-------------------------------------------------\n");
 
     do {
         putchar('\n');
