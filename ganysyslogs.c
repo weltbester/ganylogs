@@ -35,6 +35,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 #define SENTINEL 7      // Determines which option can quit the program
 
 /* CONSTANTS */
@@ -42,12 +44,12 @@
 /* STRUCTS */
 
 /* PROTOTYPES */
-void enterRouters(char *hosts[], int *n);
+char *enterRouters();
 void addRouters(char *hosts[], int *n);
 void showRouters(char *arr[], int n);
 
 int main(int argc, const char **argv) {
-    char *routers = NULL;
+    char *hosts = NULL;
     int choice = 0, nHosts = 0;
     // char *hosts[9]; // noch Implementierung prüfen!!
     printf("\n\tGANYSYSLOGS: TOOL TO IDENTIFY NEW SYSLOG MESSAGES\n");
@@ -72,17 +74,17 @@ int main(int argc, const char **argv) {
 
         // Switch Anweisung
         switch (choice) {
-            case 1: enterRouters(&routers, &nHosts);   // Enter hostname
+            case 1: hosts = enterRouters();   // Enter hostname
             break;
-            case 2: if (NULL == routers) {
+            case 2: if (NULL == hosts) {
                         printf("Function is only for adding routers\n"
                         "to existing routers. - Use option '1' first.\n");
                         break;
                     } else {
-                        addRouters(&routers, &nHosts); // Create cronjob
+                        addRouters(&hosts, &nHosts); // Create cronjob
                     }
             break;
-            case 3: showRouters(&routers, nHosts);// showHostnames(char **arr, int n) // Enter syslog signature to 'blacklist'
+            case 3: showRouters(&hosts, 6);// showHostnames(char **arr, int n) // Enter syslog signature to 'blacklist'
             break;
             case 4: // Enter syslog signature to 'whitelist'
             break;
@@ -100,6 +102,28 @@ int main(int argc, const char **argv) {
   return EXIT_SUCCESS;
 }
 
+char *enterRouters() {
+    int n = 0;
+    printf("How many routers to enter? ");
+    if ( (scanf("%d", &n) != 1)) {
+        printf("Input Error!\n");
+        exit(1);
+    }
+    char *routers[n];
+    char hostName[20];
+    for (int i=0; i < n; ++i) {
+        printf("Enter %d router: ", i+1);
+        if ( (scanf("%s[^\n]", hostName) != 1) ) {
+            printf("Input Error!\n");
+            break;
+        }
+        routers[i] = (char *)malloc(strlen(hostName) * sizeof(char));
+        strcpy(routers[i], hostName);
+    }
+    return *routers;
+}
+
+/*
 void enterRouters(char *hosts[], int *n) {
     *n = 0;
     printf("Enter the number of routers: ");
@@ -116,7 +140,7 @@ void enterRouters(char *hosts[], int *n) {
             exit(1);
         }   
     }
-}
+} */
 
 void addRouters(char *hosts[], int *n) {
     int nAdd = 0;
