@@ -35,15 +35,16 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#define SENTINEL 7
+#define SENTINEL 7      // Determines which option can quit the program
 
 /* CONSTANTS */
 
 /* STRUCTS */
 
 /* PROTOTYPES */
-void enterHostnames(char *hosts[], int *n);
-void showHostnames(char *arr[], int n);
+void enterRouters(char *hosts[], int *n);
+void addRouters(char *hosts[], int *n);
+void showRouters(char *arr[], int n);
 
 int main(int argc, const char **argv) {
     char *routers = NULL;
@@ -54,9 +55,9 @@ int main(int argc, const char **argv) {
 
     do {
         putchar('\n');
-        printf("\t-1- Enter hostnames\n");
-        printf("\t-2- Add hostnames\n");
-        printf("\t-3- Show hostnames\n");
+        printf("\t-1- Enter routers\n");
+        printf("\t-2- Add more routers\n");
+        printf("\t-3- Show routers\n");
         printf("\t-4- Create cronjob\n");
         printf("\t-5- Enter syslog signature to 'blacklist'\n");
         printf("\t-6- Enter syslog signature to 'whitelist'\n");
@@ -71,11 +72,17 @@ int main(int argc, const char **argv) {
 
         // Switch Anweisung
         switch (choice) {
-            case 1: enterHostnames(&routers, &nHosts);   // Enter hostname
+            case 1: enterRouters(&routers, &nHosts);   // Enter hostname
             break;
-            case 2: // Create cronjob
+            case 2: if (NULL == routers) {
+                        printf("Function is only for adding routers\n"
+                        "to existing routers. - Use option '1' first.\n");
+                        break;
+                    } else {
+                        addRouters(&routers, &nHosts); // Create cronjob
+                    }
             break;
-            case 3: showHostnames(&routers, nHosts);// showHostnames(char **arr, int n) // Enter syslog signature to 'blacklist'
+            case 3: showRouters(&routers, nHosts);// showHostnames(char **arr, int n) // Enter syslog signature to 'blacklist'
             break;
             case 4: // Enter syslog signature to 'whitelist'
             break;
@@ -93,17 +100,17 @@ int main(int argc, const char **argv) {
   return EXIT_SUCCESS;
 }
 
-void enterHostnames(char *hosts[], int *n) {
+void enterRouters(char *hosts[], int *n) {
     *n = 0;
-    printf("Enter the number of routers (<=5): ");
-    if ( (scanf("%d", n) == 0)) {
+    printf("Enter the number of routers: ");
+    if ( (scanf("%d", n) != 1)) {
         printf("Input Error!\n");
         exit(1);
     }
     // Allocate memory for a Char-Array with 'nHosts' Elementf of size 9
     for (int j=0; j < *n; ++j) {
         hosts[j] = (char *)malloc(9 * sizeof(char));
-        printf("%d. Hostname: ", j+1);
+        printf("%d. Router: ", j+1);
         if ( (scanf("%s[^\n]", hosts[j]) != 1)) {
             printf("Input Error!\n");
             exit(1);
@@ -111,7 +118,26 @@ void enterHostnames(char *hosts[], int *n) {
     }
 }
 
-void showHostnames(char *arr[], int n) {
+void addRouters(char *hosts[], int *n) {
+    int nAdd = 0;
+    char **newRouters = NULL;
+    printf("How many routers to add? ");
+    if ( (scanf("%d", &nAdd) != 1)) {
+        printf("Input Error!\n");
+        exit(1);
+    }
+    *n += nAdd;
+    newRouters = (char **)realloc(hosts, *n+nAdd * sizeof(char*));
+    for (int j=*n-nAdd; j < *n; ++j) {
+        printf("%d. Router: ", j+1);
+        if ( (scanf("%s[^\n]", newRouters[j]) != 1) ) {
+            printf("Input Error!\n");
+            exit(1);
+        }
+    }
+}
+
+void showRouters(char *arr[], int n) {
     printf("\nAdded routers: ");
     printf("[");
     for (int i=0; i < n; ++i) {
