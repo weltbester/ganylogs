@@ -37,7 +37,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define SENTINEL 7      // Determines which option can quit the program
+#define SENTINEL 8      // Determines which option can quit the program
 
 /* CONSTANTS */
 
@@ -47,6 +47,7 @@
 void enterRouters(char *devices[], int n);
 void addRouters(char *devices[], int n, int more);
 void showRouters(char *arr[], int n);
+void freeMemory(char *devices[], int n);
 
 int main(int argc, const char **argv) {
     int choice = 0, nHosts = 0, more = 0;
@@ -58,11 +59,12 @@ int main(int argc, const char **argv) {
         putchar('\n');
         printf("\t-1- Enter routers\n");
         printf("\t-2- Add more routers\n");
-        printf("\t-3- Show routers\n");
-        printf("\t-4- Create cronjob\n");
-        printf("\t-5- Enter syslog signature to 'blacklist'\n");
-        printf("\t-6- Enter syslog signature to 'whitelist'\n");
-        printf("\t-7- Quit\n\n");
+        printf("\t-3- Delete all routers\n");
+        printf("\t-4- Show routers\n");
+        printf("\t-5- Create cronjob\n");
+        printf("\t-6- Enter syslog signature to 'blacklist'\n");
+        printf("\t-7- Enter syslog signature to 'whitelist'\n");
+        printf("\t-8- Quit\n\n");
 
         printf("Your choice: ");
         if ( (scanf("%d", &choice) != 1) ) {
@@ -78,10 +80,11 @@ int main(int argc, const char **argv) {
                         printf("Input Error!\n");
                         return EXIT_FAILURE;
                     }
-                    char **routers = (char **)malloc(nHosts * sizeof(char *));
+                    char **routers = NULL;
+                    routers = (char **)malloc(nHosts * sizeof(char *));
                     enterRouters(routers, nHosts);   // Enter hostnames
             break;
-            case 2: if (NULL == routers[0]) {
+            case 2: if (NULL == routers) {
                         printf("Function is only for adding routers\n"
                         "to existing routers. - Use option '1' first.\n");
                         break;
@@ -91,23 +94,24 @@ int main(int argc, const char **argv) {
                             printf("Input Error!\n");
                             exit(1);
                         }
-                        routers = (char **)realloc(routers, (nHosts + more) * sizeof(char *));
+                        nHosts += more;
+                        routers = (char **)realloc(routers, nHosts * sizeof(char *));
                         addRouters(routers, nHosts, more); // Create cronjob
                     }
             break;
-            case 3: showRouters(routers, nHosts);// showHostnames(char **arr, int n) // Enter syslog signature to 'blacklist'
+            case 3: freeMemory(routers, nHosts);
+                    printf("All routers deleted.\n");
             break;
-            case 4: // Enter syslog signature to 'whitelist'
+            case 4: showRouters(routers, nHosts);// showHostnames(char **arr, int n) // Enter syslog signature to 'blacklist'
             break;
-            case 5: // do something
+            case 5: // Enter syslog signature to 'whitelist'
             break;
-            case SENTINEL:  if ( NULL == routers) {
-                            for (int i = 0; i < nHosts; ++i) {
-                                free(routers[i]);
-                            }
-                              free(routers);
-                            }
-                            routers = NULL;
+            case 6:
+            break;
+            case 7:
+            break;
+            case SENTINEL:  freeMemory(routers, nHosts);
+                            printf("%p\n", *routers);
                             printf("Bye!\n");
             break;
             default: printf("Gültige Auswahl 1 - %d\n\n", SENTINEL);
@@ -139,7 +143,7 @@ void enterRouters(char *devices[], int n) {
 
 void addRouters(char *devices[], int n, int more) {
     char hostName[20];
-    for (int i=n; i < (n + more); ++i) {
+    for (int i=n-more; i < n; ++i) {
         printf("%d. Hostname: ", i+1);
         if ( (scanf("%s[^\n]", hostName) != 1) ) {
             printf("Input Error!\n");
@@ -167,4 +171,15 @@ void showRouters(char *arr[], int n) {
     }
     printf("]\n\n");
     return;
+}
+
+void freeMemory(char *devices[], int n) {
+    if ( NULL != devices[0]) {
+        for (int i = 0; i < n; ++i) {
+            free(devices[i]);
+            devices[i] = NULL;
+        }
+        free(devices);
+    }
+    devices = NULL;
 }
