@@ -44,12 +44,13 @@
 /* STRUCTS */
 
 /* PROTOTYPES */
-void enterRouters(char *devices[], int n);
+char **enterRouters(int *groesse);
 void addRouters(char *devices[], int n, int more);
 void showRouters(char *arr[], int n);
 void freeMemory(char *devices[], int n);
 
 int main(int argc, const char **argv) {
+    char **routers = NULL;
     int choice = 0, nHosts = 0, more = 0;
     // char *hosts[9]; // noch Implementierung prüfen!!
     printf("\n\tGANYSYSLOGS: TOOL TO IDENTIFY NEW SYSLOG MESSAGES\n");
@@ -75,14 +76,10 @@ int main(int argc, const char **argv) {
 
         // Switch Anweisung
         switch (choice) {
-            case 1: printf("How many routers to enter? ");
-                    if ( (scanf("%d", &nHosts) != 1)) {
-                        printf("Input Error!\n");
-                        return EXIT_FAILURE;
+            case 1: routers = enterRouters(&nHosts);   // Enter hostnames
+                    if (NULL == routers) {
+                        return 1;
                     }
-                    char **routers = NULL;
-                    routers = (char **)malloc(nHosts * sizeof(char *));
-                    enterRouters(routers, nHosts);   // Enter hostnames
             break;
             case 2: if (NULL == routers) {
                         printf("Function is only for adding routers\n"
@@ -100,7 +97,7 @@ int main(int argc, const char **argv) {
                     }
             break;
             case 3: freeMemory(routers, nHosts);
-                    printf("All routers deleted.\n");
+                    printf("All %d routers deleted.\n", nHosts);
             break;
             case 4: showRouters(routers, nHosts);// showHostnames(char **arr, int n) // Enter syslog signature to 'blacklist'
             break;
@@ -110,9 +107,12 @@ int main(int argc, const char **argv) {
             break;
             case 7:
             break;
-            case SENTINEL:  freeMemory(routers, nHosts);
-                            printf("%p\n", *routers);
-                            printf("Bye!\n");
+            case SENTINEL:  printf("Bye!\n");
+                            if ( NULL == routers) {
+                                break;
+                            } else {
+                                freeMemory(routers, nHosts);
+                            }
             break;
             default: printf("Gültige Auswahl 1 - %d\n\n", SENTINEL);
             break;
@@ -123,22 +123,29 @@ int main(int argc, const char **argv) {
   return EXIT_SUCCESS;
 }
 
-void enterRouters(char *devices[], int n) {
+char **enterRouters(int *groesse) {
+    char **result;
+    printf("How many routers to enter? ");
+    if ( (scanf("%d", groesse) != 1)) {
+        printf("Input Error!\n");
+        return NULL;
+    }
+    result = (char **)malloc(*groesse * sizeof(char *));
     char hostName[20];
-    for (int i=0; i < n; ++i) {
+    for (int i=0; i < *groesse; ++i) {
         printf("%d. Hostname: ", i+1);
         if ( (scanf("%s[^\n]", hostName) != 1) ) {
             printf("Input Error!\n");
-            break;
+            return NULL;
         }
-        devices[i] = (char *)malloc((strlen(hostName)+ 1) * sizeof(char));
-        if ( NULL == devices[i]) {
+        result[i] = (char *)malloc((strlen(hostName)+ 1) * sizeof(char));
+        if ( NULL == result[i]) {
             printf("Memory Allocation Failure!\n");
             break;
         }
-        strcpy(devices[i], hostName);
+        strcpy(result[i], hostName);
     }
-    return;
+    return result;
 }
 
 void addRouters(char *devices[], int n, int more) {
@@ -172,7 +179,7 @@ void showRouters(char *arr[], int n) {
     printf("]\n\n");
     return;
 }
-
+// TODO: Funktion bringt manchmal SegFaults!
 void freeMemory(char *devices[], int n) {
     if ( NULL != devices[0]) {
         for (int i = 0; i < n; ++i) {
