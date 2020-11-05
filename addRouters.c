@@ -8,7 +8,7 @@ void addRouters(char *devices[], int n, int more) {
         printf("%d. Hostname: ", i+1);
         if ( (scanf("%s[^\n]", hostName) != 1) ) {
             printf("Input Error!\n");
-            exit(1);
+            exit(EXIT_FAILURE);
         }
         devices[i] = (char *)malloc((strlen(hostName)+ 1) * sizeof(char));
         if ( NULL == devices[i]) {

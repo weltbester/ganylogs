@@ -47,6 +47,8 @@
 extern char **enterRouters(int *groesse);
 extern void addRouters(char *devices[], int n, int more);
 extern char **deleteRouters(char *devices[], int *n);
+void append2bl(void);
+void append2wl(void);
 
 void showRouters(char *arr[], int n);
 
@@ -93,7 +95,7 @@ int main(int argc, const char **argv) {
                         printf("How many routers to add? ");
                         if ( (scanf("%d", &more) != 1)) {
                             printf("Input Error!\n");
-                            exit(1);
+                            exit(EXIT_FAILURE);
                         }
                         nHosts += more;
                         routers = (char **)realloc(routers, nHosts * sizeof(char *));
@@ -111,7 +113,7 @@ int main(int argc, const char **argv) {
             case 5:
             break;
             // Enter syslog signature to 'blacklist'
-            case 6:
+            case 6: append2bl();
             break;
             // Enter syslog signature to 'whitelist'
             case 7:
@@ -129,4 +131,30 @@ int main(int argc, const char **argv) {
     // Free memory and avoid dangling pointers
     
   return EXIT_SUCCESS;
+}
+void append2bl(void) {
+    FILE *fpwl;
+    char signature[20];
+    
+    // hint to signature format, e.g.: %BLABLABLA%
+    fpwl = fopen("blacklist.txt", "a");
+    // make backup before writing to the file!!!
+    if (fpwl == NULL) {
+        printf("Cannot open file!\n");
+        return;
+    }
+    printf("Append Log-Signature to blacklist\n");
+    printf("Please enter signature: ");
+    if ( scanf("%s20", signature) != 1 ) {
+      printf("Input error!\n");
+      return;  
+    } 
+    fprintf(fpwl, "%s\n", signature);
+    printf("\nAdded '%s' to blacklist.\n", signature);
+    // add more messages-Loop
+
+    fclose(fpwl);
+}
+void append2wl(void) {
+
 }
