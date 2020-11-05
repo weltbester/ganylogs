@@ -44,10 +44,12 @@
 /* STRUCTS */
 
 /* PROTOTYPES */
-char **enterRouters(int *groesse);
-void addRouters(char *devices[], int n, int more);
+extern char **enterRouters(int *groesse);
+extern void addRouters(char *devices[], int n, int more);
+extern char **deleteRouters(char *devices[], int *n);
+
 void showRouters(char *arr[], int n);
-char **deleteRouters(char *devices[], int *n);
+
 
 int main(int argc, const char **argv) {
     char **routers = NULL;
@@ -82,7 +84,7 @@ int main(int argc, const char **argv) {
                         return 1;
                     }
             break;
-            // Add more routers
+            // Add more routers: NOCH RICHTIG IMPLEMENTIEREN
             case 2: if (NULL == routers) {
                         printf("Function is only for adding routers\n"
                         "to existing routers. - Use option '1' first.\n");
@@ -119,13 +121,6 @@ int main(int argc, const char **argv) {
                                 free(routers);
                                 routers = NULL;
                             }
-                            
-                            /* if ( NULL == routers) {
-                                break;
-                            } else {
-                                free(routers);
-                                routers = NULL;
-                            }*/
             break;
             default: printf("Gültige Auswahl 1 - %d\n\n", SENTINEL);
             break;
@@ -134,80 +129,4 @@ int main(int argc, const char **argv) {
     // Free memory and avoid dangling pointers
     
   return EXIT_SUCCESS;
-}
-char **enterRouters(int *groesse) {
-    char **result;
-    printf("How many routers to enter? ");
-    if ( (scanf("%d", groesse) != 1)) {
-        printf("Input Error!\n");
-        return NULL;
-    }
-    result = (char **)malloc(*groesse * sizeof(char *));
-    if ( NULL == result ) {
-        fprintf(stderr, "Memory Allocation Failure\n");
-        return NULL;
-    }
-    char hostName[20];
-    for (int i=0; i < *groesse; ++i) {
-        printf("%d. Hostname: ", i+1);
-        if ( (scanf("%s[^\n]", hostName) != 1) ) {
-            printf("Input Error!\n");
-            return NULL;
-        }
-        result[i] = (char *)malloc((strlen(hostName)+ 1) * sizeof(char));
-        if ( NULL == result[i]) {
-            fprintf(stderr, "Memory Allocation Failure\n");
-            return NULL;
-        }
-        strcpy(result[i], hostName);
-    }
-    return result;
-}
-void addRouters(char *devices[], int n, int more) {
-    char hostName[20];
-    for (int i=n-more; i < n; ++i) {
-        printf("%d. Hostname: ", i+1);
-        if ( (scanf("%s[^\n]", hostName) != 1) ) {
-            printf("Input Error!\n");
-            exit(1);
-        }
-        devices[i] = (char *)malloc((strlen(hostName)+ 1) * sizeof(char));
-        if ( NULL == devices[i]) {
-            fprintf(stderr, "Memory Allocation Failure\n");
-            break;
-        }
-        strcpy(devices[i], hostName);
-    }
-    return;
-}
-void showRouters(char *arr[], int n) {
-    if (NULL == arr) {
-        printf("No routers entered\n");
-    } else {
-        printf("\nAdded routers: ");
-        printf("[");
-        for (int i=0; i < n; ++i) {
-            if (i == 0) {
-                printf("%s", arr[i]);
-            } else {
-                printf(", %s", arr[i]);
-            } 
-        }
-        printf("]\n\n");
-    }    
-    return;
-}
-// TODO: Funktion bringt manchmal SegFaults!
-char **deleteRouters(char *devices[], int *n) {
-    //int m = *n;
-    if ( NULL != devices) {
-        for (int i = 0; i < *n; ++i) {
-            free(devices[i]);
-            //*n -= 1;
-            //devices[i] = NULL;
-        }
-        free(devices);        
-        devices = NULL;
-    }
-    return devices;
 }
