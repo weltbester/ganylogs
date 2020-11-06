@@ -1,4 +1,4 @@
-# ganylogs
+# ganysyslogs
 t.b.d.
 
 # Documentation
