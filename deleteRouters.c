@@ -2,12 +2,10 @@
 #include <stdlib.h>
 
 char **deleteRouters(char *devices[], int *n) {
-    //int m = *n;
+    int i = 0;
     if ( NULL != devices) {
-        for (int i = 0; i < *n; ++i) {
+        for (i = 0; i < *n; ++i) {
             free(devices[i]);
-            //*n -= 1;
-            //devices[i] = NULL;
         }
         free(devices);        
         devices = NULL;

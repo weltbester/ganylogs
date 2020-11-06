@@ -87,7 +87,7 @@ int main(int argc, const char **argv) {
                     }
             break;
             // Add more routers: NOCH RICHTIG IMPLEMENTIEREN
-            case 2: if (NULL == routers) {
+            case 2:if (NULL == routers) {
                         printf("Function is only for adding routers\n"
                         "to existing routers. - Use option '1' first.\n");
                         break;
@@ -102,7 +102,6 @@ int main(int argc, const char **argv) {
                         addRouters(routers, nHosts, more); // Create cronjob
                     }
             break;
-            // Delete all entered routers
             case 3: routers = deleteRouters(routers, &nHosts);
                     printf("%d router(s) deleted.\n", nHosts);
             break;
@@ -154,6 +153,24 @@ void append2bl(void) {
     // add more messages-Loop
 
     fclose(fpwl);
+}
+void showRouters(char *arr[], int n) {
+    int i = 0;
+    if (NULL == arr) {
+        printf("No routers entered\n");
+    } else {
+        printf("\nAdded routers: ");
+        printf("[");
+        for (i=0; i < n; ++i) {
+            if (i == 0) {
+                printf("%s", arr[i]);
+            } else {
+                printf(", %s", arr[i]);
+            } 
+        }
+        printf("]\n\n");
+    }    
+    return;
 }
 void append2wl(void) {
 

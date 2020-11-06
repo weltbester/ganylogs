@@ -4,7 +4,8 @@
 
 void addRouters(char *devices[], int n, int more) {
     char hostName[20];
-    for (int i=n-more; i < n; ++i) {
+    int i = 0;
+    for (i=n-more; i < n; ++i) {
         printf("%d. Hostname: ", i+1);
         if ( (scanf("%s[^\n]", hostName) != 1) ) {
             printf("Input Error!\n");
@@ -17,22 +18,5 @@ void addRouters(char *devices[], int n, int more) {
         }
         strcpy(devices[i], hostName);
     }
-    return;
-}
-void showRouters(char *arr[], int n) {
-    if (NULL == arr) {
-        printf("No routers entered\n");
-    } else {
-        printf("\nAdded routers: ");
-        printf("[");
-        for (int i=0; i < n; ++i) {
-            if (i == 0) {
-                printf("%s", arr[i]);
-            } else {
-                printf(", %s", arr[i]);
-            } 
-        }
-        printf("]\n\n");
-    }    
     return;
 }

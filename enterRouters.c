@@ -4,6 +4,7 @@
 
 char **enterRouters(int *groesse) {
     char **result;
+    int i = 0;
     printf("How many routers to enter? ");
     if ( (scanf("%d", groesse) != 1)) {
         printf("Input Error!\n");
@@ -15,7 +16,7 @@ char **enterRouters(int *groesse) {
         return NULL;
     }
     char hostName[20];
-    for (int i=0; i < *groesse; ++i) {
+    for (i=0; i < *groesse; ++i) {
         printf("%d. Hostname: ", i+1);
         if ( (scanf("%s[^\n]", hostName) != 1) ) {
             printf("Input Error!\n");
