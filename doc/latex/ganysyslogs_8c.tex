@@ -1,0 +1,104 @@
+\hypertarget{ganysyslogs_8c}{}\section{/\+Users/georg/\+Nextcloud/\+Programming/c/ganysyslogs/ganysyslogs.c File Reference}
+\label{ganysyslogs_8c}\index{/Users/georg/Nextcloud/Programming/c/ganysyslogs/ganysyslogs.c@{/Users/georg/Nextcloud/Programming/c/ganysyslogs/ganysyslogs.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ganysyslogs_8c_af2af475b85aef66019c417d8ded1c435}{S\+E\+N\+T\+I\+N\+EL}}~8
+\begin{DoxyCompactList}\small\item\em Tool to identify new syslog messages. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$$\ast$ \mbox{\hyperlink{ganysyslogs_8c_afb834858f2eb1fc2715d98df09ee8b03}{enter\+Routers}} (int $\ast$groesse)
+\item 
+void \mbox{\hyperlink{ganysyslogs_8c_a272fc61cfad3063b7d1f93d34b5a053f}{add\+Routers}} (char $\ast$devices\mbox{[}$\,$\mbox{]}, int n, int more)
+\item 
+char $\ast$$\ast$ \mbox{\hyperlink{ganysyslogs_8c_a5ccd8e8f9ec897600bd660d0b91c2c1f}{delete\+Routers}} (char $\ast$devices\mbox{[}$\,$\mbox{]}, int $\ast$n)
+\item 
+void \mbox{\hyperlink{ganysyslogs_8c_a8104259930e60c68ccfeafb7246ca6a7}{append2list}} (void)
+\item 
+void \mbox{\hyperlink{ganysyslogs_8c_a03bacbd7544e387585dbba5168ed0e99}{show\+Routers}} (char $\ast$arr\mbox{[}$\,$\mbox{]}, int n)
+\item 
+int \mbox{\hyperlink{ganysyslogs_8c_a217dbf8b442f20279ea00b898af96f52}{main}} (int argc, const char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ganysyslogs_8c_af2af475b85aef66019c417d8ded1c435}\label{ganysyslogs_8c_af2af475b85aef66019c417d8ded1c435}} 
+\index{ganysyslogs.c@{ganysyslogs.c}!SENTINEL@{SENTINEL}}
+\index{SENTINEL@{SENTINEL}!ganysyslogs.c@{ganysyslogs.c}}
+\subsubsection{\texorpdfstring{SENTINEL}{SENTINEL}}
+{\footnotesize\ttfamily \#define S\+E\+N\+T\+I\+N\+EL~8}
+
+
+
+Tool to identify new syslog messages. 
+
+File\+: \mbox{\hyperlink{ganysyslogs_8c}{ganysyslogs.\+c}}
+
+Author\+: Georg Pohl, 70174 Stuttgart
+
+Create date\+: 8th of November 2020
+
+Version\+: 1.\+0
+
+Last Change\+: 8th of November 2020
+
+
+
+ This program can be used to identify unknown syslog messages, when you introduce a new router software. It is meant to be used durch den Product Validation (PV) time only. Therefore you feed the program with the involved router hostnames, so that it can browse through the recent logfile and grep out every syslog message of the before defined hosts.
+
+Every message is then compared with the \textquotesingle{}blacklist\textquotesingle{}-\/ and a \textquotesingle{}whitelist\textquotesingle{} file.
+
+
+\begin{DoxyEnumerate}
+\item If it is found in \textquotesingle{}blacklist\textquotesingle{}, the message is known but regarded as not-\/remarkable and the original message is skipped.
+\item If it is found in the \textquotesingle{}whitelist\textquotesingle{} it is already know and declared as remarkable and therfore under control. So no further processing needed and therefore also skipped.
+\item The message is neither known in the \textquotesingle{}blacklist\textquotesingle{} nor the \textquotesingle{}whitelist\textquotesingle{} means we are dealing with an unknown message here. This message is send to the initiator of the script via e-\/\+Mail for further investigation. Depending on the importance of the syslog message, it then copied either to the \textquotesingle{}black-\/\textquotesingle{} or \textquotesingle{}whitelist\textquotesingle{}.
+\end{DoxyEnumerate}
+
+\textquotesingle{}blacklist\textquotesingle{}\+: contains log messages which are not transferred to the \char`\"{}\+M\+O\+N\+I\+T\+O\+R\+I\+N\+G S\+Y\+S\+T\+E\+M\char`\"{}.
+
+\textquotesingle{}whitelist\textquotesingle{}\+: contains log messages which are importand and have to be transferred to the \char`\"{}\+M\+O\+N\+I\+T\+O\+R\+I\+N\+G S\+Y\+S\+T\+E\+M\char`\"{}.
+
+Copyright (C) 2020 C\+AN Georg Pohl 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ganysyslogs_8c_a272fc61cfad3063b7d1f93d34b5a053f}\label{ganysyslogs_8c_a272fc61cfad3063b7d1f93d34b5a053f}} 
+\index{ganysyslogs.c@{ganysyslogs.c}!addRouters@{addRouters}}
+\index{addRouters@{addRouters}!ganysyslogs.c@{ganysyslogs.c}}
+\subsubsection{\texorpdfstring{addRouters()}{addRouters()}}
+{\footnotesize\ttfamily void add\+Routers (\begin{DoxyParamCaption}\item[{char $\ast$}]{devices\mbox{[}$\,$\mbox{]},  }\item[{int}]{n,  }\item[{int}]{more }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ganysyslogs_8c_a8104259930e60c68ccfeafb7246ca6a7}\label{ganysyslogs_8c_a8104259930e60c68ccfeafb7246ca6a7}} 
+\index{ganysyslogs.c@{ganysyslogs.c}!append2list@{append2list}}
+\index{append2list@{append2list}!ganysyslogs.c@{ganysyslogs.c}}
+\subsubsection{\texorpdfstring{append2list()}{append2list()}}
+{\footnotesize\ttfamily void append2list (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ganysyslogs_8c_a5ccd8e8f9ec897600bd660d0b91c2c1f}\label{ganysyslogs_8c_a5ccd8e8f9ec897600bd660d0b91c2c1f}} 
+\index{ganysyslogs.c@{ganysyslogs.c}!deleteRouters@{deleteRouters}}
+\index{deleteRouters@{deleteRouters}!ganysyslogs.c@{ganysyslogs.c}}
+\subsubsection{\texorpdfstring{deleteRouters()}{deleteRouters()}}
+{\footnotesize\ttfamily char$\ast$$\ast$ delete\+Routers (\begin{DoxyParamCaption}\item[{char $\ast$}]{devices\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ganysyslogs_8c_afb834858f2eb1fc2715d98df09ee8b03}\label{ganysyslogs_8c_afb834858f2eb1fc2715d98df09ee8b03}} 
+\index{ganysyslogs.c@{ganysyslogs.c}!enterRouters@{enterRouters}}
+\index{enterRouters@{enterRouters}!ganysyslogs.c@{ganysyslogs.c}}
+\subsubsection{\texorpdfstring{enterRouters()}{enterRouters()}}
+{\footnotesize\ttfamily char$\ast$$\ast$ enter\+Routers (\begin{DoxyParamCaption}\item[{int $\ast$}]{groesse }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ganysyslogs_8c_a217dbf8b442f20279ea00b898af96f52}\label{ganysyslogs_8c_a217dbf8b442f20279ea00b898af96f52}} 
+\index{ganysyslogs.c@{ganysyslogs.c}!main@{main}}
+\index{main@{main}!ganysyslogs.c@{ganysyslogs.c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{const char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ganysyslogs_8c_a03bacbd7544e387585dbba5168ed0e99}\label{ganysyslogs_8c_a03bacbd7544e387585dbba5168ed0e99}} 
+\index{ganysyslogs.c@{ganysyslogs.c}!showRouters@{showRouters}}
+\index{showRouters@{showRouters}!ganysyslogs.c@{ganysyslogs.c}}
+\subsubsection{\texorpdfstring{showRouters()}{showRouters()}}
+{\footnotesize\ttfamily void show\+Routers (\begin{DoxyParamCaption}\item[{char $\ast$}]{arr\mbox{[}$\,$\mbox{]},  }\item[{int}]{n }\end{DoxyParamCaption})}
+

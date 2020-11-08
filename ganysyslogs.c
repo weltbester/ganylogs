@@ -1,7 +1,17 @@
-/** 
- * Copyright October 2020: Georg Pohl, 70174 Stuttgart
+/*! @brief Tool to identify new syslog messages */
+/**
+ * 
  * File: ganysyslogs.c
- * -------------------
+ *
+ * Author: Georg Pohl, 70174 Stuttgart
+ *
+ * Create date: 8th of November 2020
+ *
+ * Version: 1.0
+ *
+ * Last Change: 8th of November 2020
+ *
+ * -----------------------------------
  * This program can be used to identify unknown syslog
  * messages, when you introduce a new router software. It is
  * meant to be used durch den Product Validation (PV) time only.
@@ -31,6 +41,8 @@
  *
  * 'whitelist': contains log messages which are importand and have
  * to be transferred to the "MONITORING SYSTEM".
+ *
+ * Copyright (C) 2020 CAN Georg Pohl
  */
 
 #include <stdio.h>
