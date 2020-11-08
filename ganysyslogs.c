@@ -67,7 +67,7 @@ int main(int argc, const char **argv) {
         printf("\t-4- Show routers\n");
         printf("\t-5- Create cronjob\n");
         printf("\t-6- Enter syslog signature to 'black-' or 'whitelist'\n");
-        printf("\t-7- Enter syslog signature to 'whitelist'\n");
+        printf("\t-7- vakant\n");
         printf("\t-8- Quit\n\n");
 
         printf("Your choice: ");

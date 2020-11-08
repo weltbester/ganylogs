@@ -22,29 +22,40 @@ void append2list(void) {
         }                                                         /* dito */
     }
 
-    /* !TODO: make backup before writing to the file!!! */
+    /* Make file backup before opening to the file */
+    char mkcpybl[63] = "cp blacklist.txt blacklist.txt.bak";
+    char mkcpywl[63] = "cp whitelist.txt whitelist.txt.bak";
     if (input == 'w') {
+        system(mkcpywl);
         strcpy(listtype, "whitelist.txt");
     } else {
+        system(mkcpybl);
         strcpy(listtype, "blacklist.txt");
     }
     listtype[13] = '\0';
     fpList = fopen(listtype, "a");
-    
-    // hint to signature format, e.g.: %BLABLABLA%
     if (fpList == NULL) {
         printf("Cannot open %s!\n", listtype);
         return;
     }
-    printf("Please enter signature: ");
-    if ( scanf("%s20", signature) != 1 ) {
-      printf("Input error!\n");
-      return;  
-    } 
-    fprintf(fpList, "%s\n", signature);
-    printf("\nAdded '%s' to %s.\n", signature, listtype);
-    /* !TODO: add more messages-Loop */
 
+    /* Enter syslog signature(s) and close file */
+    unsigned char jn = ' ';
+    do {
+        printf("\nPlease enter signature [Format: $BLABLABLA$]: ");
+        if ( scanf("%s20", signature) != 1 ) {
+            printf("Input error!\n");
+        return;  
+        } 
+        fprintf(fpList, "%s\n", signature);
+        printf("\nAdded '%s' to %s.\n", signature, listtype);
+        /* !TODO: dump buffer and delete whitespace in " %c"!!! */
+        printf("More signatures? ");
+        if (scanf(" %c", &jn) != 1) {
+            printf("Input Error!\n");
+            exit(EXIT_FAILURE);
+        }
+    } while ( jn == 'y' || jn == 'Y');
     fclose(fpList);
     return;
 }
