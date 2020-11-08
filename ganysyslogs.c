@@ -47,8 +47,7 @@
 extern char **enterRouters(int *groesse);
 extern void addRouters(char *devices[], int n, int more);
 extern char **deleteRouters(char *devices[], int *n);
-void append2bl(void);
-void append2wl(void);
+extern void append2list(void);
 
 void showRouters(char *arr[], int n);
 
@@ -67,7 +66,7 @@ int main(int argc, const char **argv) {
         printf("\t-3- Delete all routers\n");
         printf("\t-4- Show routers\n");
         printf("\t-5- Create cronjob\n");
-        printf("\t-6- Enter syslog signature to 'blacklist'\n");
+        printf("\t-6- Enter syslog signature to 'black-' or 'whitelist'\n");
         printf("\t-7- Enter syslog signature to 'whitelist'\n");
         printf("\t-8- Quit\n\n");
 
@@ -112,7 +111,7 @@ int main(int argc, const char **argv) {
             case 5:
             break;
             // Enter syslog signature to 'blacklist'
-            case 6: append2bl();
+            case 6: append2list();
             break;
             // Enter syslog signature to 'whitelist'
             case 7:
@@ -131,29 +130,6 @@ int main(int argc, const char **argv) {
     
   return EXIT_SUCCESS;
 }
-void append2bl(void) {
-    FILE *fpwl;
-    char signature[20];
-    
-    // hint to signature format, e.g.: %BLABLABLA%
-    fpwl = fopen("blacklist.txt", "a");
-    // make backup before writing to the file!!!
-    if (fpwl == NULL) {
-        printf("Cannot open file!\n");
-        return;
-    }
-    printf("Append Log-Signature to blacklist\n");
-    printf("Please enter signature: ");
-    if ( scanf("%s20", signature) != 1 ) {
-      printf("Input error!\n");
-      return;  
-    } 
-    fprintf(fpwl, "%s\n", signature);
-    printf("\nAdded '%s' to blacklist.\n", signature);
-    // add more messages-Loop
-
-    fclose(fpwl);
-}
 void showRouters(char *arr[], int n) {
     int i = 0;
     if (NULL == arr) {
@@ -171,7 +147,4 @@ void showRouters(char *arr[], int n) {
         printf("]\n\n");
     }    
     return;
-}
-void append2wl(void) {
-
 }
