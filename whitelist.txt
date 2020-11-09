@@ -1,8 +1,4 @@
-white
-whiter
-whitest
 %PERGEPERGE%
-dkkdk
 %ratratrat%
 %PALIMPALIM%
 hitelist
@@ -18,3 +14,4 @@ hitelist
 %THREE%
 %KARAOKE%
 %KARATE%
+%CLRSCR%

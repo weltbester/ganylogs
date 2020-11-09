@@ -50,7 +50,7 @@ void append2list(void) {
         fprintf(fpList, "%s\n", signature);
         printf("\nAdded '%s' to %s.\n", signature, listtype);
         /* !TODO: dump buffer and delete whitespace in " %c"!!! */
-        printf("More signatures? ");
+        printf("\nMore signatures? (y/n, Y/N) ");
         if (scanf(" %c", &jn) != 1) {
             printf("Input Error!\n");
             exit(EXIT_FAILURE);

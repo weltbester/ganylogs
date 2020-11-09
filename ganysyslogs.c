@@ -49,6 +49,17 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* Routine to clear the screen */
+#ifdef __unix__
+    #define clrscr() printf("\x1B[2J") 
+#elif __BORLANDC__ && __MSDOS__
+    #include <conio.h>
+#elif __WIN32__ || _MSC_VER
+    #define clrscr() system("cls") 
+#else
+    #define clrscr() printf("clrscr() - Fehler!!\n") 
+#endif
+
 #define SENTINEL 8      // Determines which option can quit the program
 
 /* CONSTANTS */
@@ -60,6 +71,7 @@ extern char **enterRouters(int *groesse);
 extern void addRouters(char *devices[], int n, int more);
 extern char **deleteRouters(char *devices[], int *n);
 extern void append2list(void);
+void createCronJob();
 
 void showRouters(char *arr[], int n);
 
@@ -87,7 +99,7 @@ int main(int argc, const char **argv) {
             printf("Fehler bei der Eingabe!\n");
             return 1;
         }
-        // putchar('\n');
+        clrscr();
 
         // Switch Anweisung
         switch (choice) {
@@ -97,7 +109,7 @@ int main(int argc, const char **argv) {
                         return 1;
                     }
             break;
-            // Add more routers: NOCH RICHTIG IMPLEMENTIEREN
+            // Add more routers: !TODO: NOCH RICHTIG IMPLEMENTIEREN
             case 2:if (NULL == routers) {
                         printf("Function is only for adding routers\n"
                         "to existing routers. - Use option '1' first.\n");
@@ -120,13 +132,13 @@ int main(int argc, const char **argv) {
             case 4: showRouters(routers, nHosts);
             break;
             // Create cronjob
-            case 5:
+            case 5: createCronJob();
             break;
             // Enter syslog signature to 'blacklist'
             case 6: append2list();
             break;
             // Enter syslog signature to 'whitelist'
-            case 7:
+            case 7: printf("Vakant!\n");
             break;
             case SENTINEL:  printf("Bye!\n");
                             if (NULL != routers) {
@@ -160,3 +172,13 @@ void showRouters(char *arr[], int n) {
     }    
     return;
 }
+void createCronJob() {
+    char addCronEntry[128] = "(crontab -l 2>/dev/null; echo \"*/5 * * * * /path/to/job -with args\") | crontab -";
+    system(addCronEntry);
+}
+
+/*
+ * A C program is not a script; it is source code that must be compiled before use. You can compile the program and then invoke it from cron with its (fully qualified) name. For example, if you compile "test.c" to the executable "test", and place it in /usr/local/bin, your cron entry would be:
+ * 52 1 * * * /usr/local/bin/test
+ * You should not place executables in the /etc directory; that is not where they belong. The /etc directory is for configuration parameters. Executables should be placed in a bin directory. Locally created executables that are available system-wide should be in /usr/local/bin/.
+ */
