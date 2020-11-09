@@ -79,7 +79,8 @@ void showRouters(char *arr[], int n);
 int main(int argc, const char **argv) {
     char **routers = NULL;
     int choice = 0, nHosts = 0, more = 0;
-    
+
+    system("clear");
     printf("\n\tGANYSYSLOGS: TOOL TO IDENTIFY NEW SYSLOG MESSAGES\n");
     printf("\t-------------------------------------------------\n");
 
@@ -99,7 +100,8 @@ int main(int argc, const char **argv) {
             printf("Fehler bei der Eingabe!\n");
             return 1;
         }
-        clrscr();
+        // !TODO: Delete clrscr() and definitions
+	system("clear");
 
         // Switch Anweisung
         switch (choice) {

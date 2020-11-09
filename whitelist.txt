@@ -15,3 +15,5 @@ hitelist
 %KARAOKE%
 %KARATE%
 %CLRSCR%
+%COVID-19%
+%SARS-Cov2%
