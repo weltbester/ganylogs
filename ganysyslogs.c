@@ -83,7 +83,6 @@ int main(int argc, const char **argv) {
     int choice = 0, nHosts = 0, more = 0;
 
     clrscr();
-    // system("clear");
     printf("\n\tGANYSYSLOGS: TOOL TO IDENTIFY NEW SYSLOG MESSAGES\n");
     printf("\t-------------------------------------------------\n");
 
@@ -105,7 +104,6 @@ int main(int argc, const char **argv) {
         }
         // !TODO: Delete clrscr() and definitions
 	clrscr();
-    // system("clear");
 
         // Switch Anweisung
         switch (choice) {
@@ -115,7 +113,7 @@ int main(int argc, const char **argv) {
                         return 1;
                     }
             break;
-            // Add more routers: !TODO: NOCH RICHTIG IMPLEMENTIEREN
+            // Add more routers
             case 2:if (NULL == routers) {
                         printf("Function is only for adding routers\n"
                         "to existing routers. - Use option '1' first.\n");
@@ -142,11 +140,12 @@ int main(int argc, const char **argv) {
             break;
             // Enter syslog signature to 'blacklist'
             case 6: append2list();
+                    clrscr();
             break;
             // Enter syslog signature to 'whitelist'
             case 7: printf("Vakant!\n");
             break;
-            case SENTINEL:  printf("Bye!\n");
+            case SENTINEL:  printf("Wirsing!\n");
                             if (NULL != routers) {
                                 free(routers);
                                 routers = NULL;

@@ -57,6 +57,5 @@ void append2list(void) {
         }
     } while ( jn == 'y' || jn == 'Y');
     fclose(fpList);
-    system("clear");
     return;
 }
