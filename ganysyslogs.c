@@ -51,7 +51,9 @@
 
 /* Routine to clear the screen */
 #ifdef __unix__
-    #define clrscr() printf("\x1B[2J") 
+    #define clrscr() printf("\x1B[2J")
+#elif __APPLE__
+    #define clrscr() printf("\x1B[2J")
 #elif __BORLANDC__ && __MSDOS__
     #include <conio.h>
 #elif __WIN32__ || _MSC_VER
@@ -71,7 +73,7 @@ extern char **enterRouters(int *groesse);
 extern void addRouters(char *devices[], int n, int more);
 extern char **deleteRouters(char *devices[], int *n);
 extern void append2list(void);
-void createCronJob();
+int createCronJob();
 
 void showRouters(char *arr[], int n);
 
@@ -80,7 +82,8 @@ int main(int argc, const char **argv) {
     char **routers = NULL;
     int choice = 0, nHosts = 0, more = 0;
 
-    system("clear");
+    clrscr();
+    // system("clear");
     printf("\n\tGANYSYSLOGS: TOOL TO IDENTIFY NEW SYSLOG MESSAGES\n");
     printf("\t-------------------------------------------------\n");
 
@@ -101,7 +104,8 @@ int main(int argc, const char **argv) {
             return 1;
         }
         // !TODO: Delete clrscr() and definitions
-	system("clear");
+	clrscr();
+    // system("clear");
 
         // Switch Anweisung
         switch (choice) {
@@ -174,11 +178,6 @@ void showRouters(char *arr[], int n) {
     }    
     return;
 }
-void createCronJob() {
-    char addCronEntry[128] = "(crontab -l 2>/dev/null; echo \"*/5 * * * * /path/to/job -with args\") | crontab -";
-    system(addCronEntry);
-}
-
 /*
  * A C program is not a script; it is source code that must be compiled before use. You can compile the program and then invoke it from cron with its (fully qualified) name. For example, if you compile "test.c" to the executable "test", and place it in /usr/local/bin, your cron entry would be:
  * 52 1 * * * /usr/local/bin/test
