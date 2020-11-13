@@ -62,7 +62,7 @@
     #define clrscr() printf("clrscr() - Fehler!!\n") 
 #endif
 
-#define SENTINEL 8      // Determines which option can quit the program
+#define SENTINEL 7      // Determines which option can quit the program
 
 /* CONSTANTS */
 
@@ -88,14 +88,13 @@ int main(int argc, const char **argv) {
 
     do {
         putchar('\n');
-        printf("\t-1- Enter routers\n");
-        printf("\t-2- Add more routers\n");
-        printf("\t-3- Delete all routers\n");
-        printf("\t-4- Show routers\n");
-        printf("\t-5- Create cronjob\n");
-        printf("\t-6- Enter syslog signature to 'black-' or 'whitelist'\n");
-        printf("\t-7- vakant\n");
-        printf("\t-8- Quit\n\n");
+        printf("\t-1- Enter/add routers\n");
+        printf("\t-2- Delete all routers\n");
+        printf("\t-3- Show routers\n");
+        printf("\t-4- Create cronjob\n");
+        printf("\t-5- Enter syslog signature to 'black-' or 'whitelist'\n");
+        printf("\t-6- vakant\n");
+        printf("\t-7- Quit\n\n");
 
         printf("Your choice: ");
         if ( (scanf("%d", &choice) != 1) ) {
@@ -108,42 +107,37 @@ int main(int argc, const char **argv) {
         // Switch Anweisung
         switch (choice) {
             // Enter routers
-            case 1: routers = enterRouters(&nHosts);
-                    if (NULL == routers) {
-                        return 1;
-                    }
-            break;
-            // Add more routers
-            case 2:if (NULL == routers) {
-                        printf("Function is only for adding routers\n"
-                        "to existing routers. - Use option '1' first.\n");
-                        break;
+            case 1: if (NULL == routers) {
+                        routers = enterRouters(&nHosts);
+                        if (NULL == routers) {
+                            return 1;
+                        }
                     } else {
-                        printf("How many routers to add? ");
+                        printf("How many routers to add to existing %d routers? ", nHosts);
                         if ( (scanf("%d", &more) != 1)) {
                             printf("Input Error!\n");
                             exit(EXIT_FAILURE);
                         }
                         nHosts += more;
                         routers = (char **)realloc(routers, nHosts * sizeof(char *));
-                        addRouters(routers, nHosts, more); // Create cronjob
+                        addRouters(routers, nHosts, more);
                     }
             break;
-            case 3: routers = deleteRouters(routers, &nHosts);
+            case 2: routers = deleteRouters(routers, &nHosts);
                     printf("%d router(s) deleted.\n", nHosts);
             break;
             // Display entered routers
-            case 4: showRouters(routers, nHosts);
+            case 3: showRouters(routers, nHosts);
             break;
             // Create cronjob
-            case 5: createCronJob();
+            case 4: createCronJob();
             break;
             // Enter syslog signature to 'blacklist'
-            case 6: append2list();
+            case 5: append2list();
                     clrscr();
             break;
             // Enter syslog signature to 'whitelist'
-            case 7: printf("Vakant!\n");
+            case 6: printf("Vakant!\n");
             break;
             case SENTINEL:  printf("Wirsing!\n");
                             if (NULL != routers) {
@@ -178,7 +172,12 @@ void showRouters(char *arr[], int n) {
     return;
 }
 /*
- * A C program is not a script; it is source code that must be compiled before use. You can compile the program and then invoke it from cron with its (fully qualified) name. For example, if you compile "test.c" to the executable "test", and place it in /usr/local/bin, your cron entry would be:
+ * A C program is not a script; it is source code that must be compiled before use.
+ * You can compile the program and then invoke it from cron with its (fully qualified) name.
+ * For example, if you compile "test.c" to the executable "test", and place it in /usr/local/bin,
+ * your cron entry would be:
  * 52 1 * * * /usr/local/bin/test
- * You should not place executables in the /etc directory; that is not where they belong. The /etc directory is for configuration parameters. Executables should be placed in a bin directory. Locally created executables that are available system-wide should be in /usr/local/bin/.
+ * You should not place executables in the /etc directory; that is not where they belong.
+ * The /etc directory is for configuration parameters. Executables should be placed in a bin directory.
+ * Locally created executables that are available system-wide should be in /usr/local/bin/.
  */
