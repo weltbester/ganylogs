@@ -12,3 +12,4 @@ char **deleteRouters(char *devices[], int *n) {
     }
     return devices;
 }
+
