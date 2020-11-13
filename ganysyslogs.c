@@ -79,8 +79,8 @@ void showRouters(char *arr[], int n);
 
 
 int main(int argc, const char **argv) {
-    char **routers = NULL;
-    int choice = 0, nHosts = 0, more = 0;
+  char **routers = NULL; /*!< Array of monitored devices */
+    int choice = 0, nHosts = 0, more = 0; //!< Option-Switch, number of monitored devices, number of additional devices
 
     clrscr();
     printf("\n\tGANYSYSLOGS: TOOL TO IDENTIFY NEW SYSLOG MESSAGES\n");
@@ -155,7 +155,6 @@ int main(int argc, const char **argv) {
             break;
         }
     } while (choice != SENTINEL);
-    // Free memory and avoid dangling pointers
     
   return EXIT_SUCCESS;
 }

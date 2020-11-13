@@ -31,3 +31,4 @@ char **enterRouters(int *groesse) {
     }
     return result;
 }
+
