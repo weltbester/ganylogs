@@ -142,7 +142,7 @@ int main(int argc, const char **argv) {
                                 routers = NULL;
                             }
             break;
-            default: printf("Gültige Auswahl 1 - %d\n\n", SENTINEL);
+            default: printf("Valid options: 1 - %d\n\n", SENTINEL);
             break;
         }
     } while (choice != SENTINEL);

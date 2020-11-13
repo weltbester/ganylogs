@@ -6,7 +6,7 @@ int createCronJob() {
     if (system(addCronEntry)) {
         return EXIT_FAILURE;
     }
-    printf("Check Cronjobs at prompt with 'crontab -e'; quit with ':q!'\n");
+    printf("Check Cronjobs at terminal prompt with 'crontab -e'; quit with ':q!'\n");
     return EXIT_SUCCESS;
 }
 
