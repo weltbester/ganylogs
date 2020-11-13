@@ -26,10 +26,10 @@ void append2list(void) {
     char mkcpybl[63] = "cp blacklist.txt blacklist.txt.bak";
     char mkcpywl[63] = "cp whitelist.txt whitelist.txt.bak";
     if (input == 'w') {
-        system(mkcpywl);
+        system(mkcpywl);    /* !TODO: Fehlerroutine einfuegen oder anders loesen */
         strcpy(listtype, "whitelist.txt");
     } else {
-        system(mkcpybl);
+        system(mkcpybl);    /* !TODO: Fehlerroutine einfuegen oder anders loesen */
         strcpy(listtype, "blacklist.txt");
     }
     listtype[13] = '\0';

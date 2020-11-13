@@ -3,13 +3,13 @@
  * 
  * File: ganysyslogs.c
  *
- * Author: Georg Pohl, 70174 Stuttgart
+ * Author: Manfred Jaede & Georg Pohl, 70174 Stuttgart
  *
  * Create date: 8th of November 2020
  *
  * Version: 1.0
  *
- * Last Change: 8th of November 2020
+ * Last Change: 13th of November 2020
  *
  * -----------------------------------
  * This program can be used to identify unknown syslog
@@ -42,14 +42,14 @@
  * 'whitelist': contains log messages which are importand and have
  * to be transferred to the "MONITORING SYSTEM".
  *
- * Copyright (C) 2020 CAN Georg Pohl
+ * Copyright (C) 2020 Manfred Jaede, CAN Georg Pohl
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-/* Routine to clear the screen */
+/* Conditional compiling options for clear screen command*/
 #ifdef __unix__
     #define clrscr() printf("\x1B[2J")
 #elif __APPLE__ || _AIX
@@ -74,9 +74,7 @@ extern void addRouters(char *devices[], int n, int more);
 extern char **deleteRouters(char *devices[], int *n);
 extern void append2list(void);
 int createCronJob();
-
 void showRouters(char *arr[], int n);
-
 
 int main(int argc, const char **argv) {
     char **routers = NULL;
@@ -101,8 +99,7 @@ int main(int argc, const char **argv) {
             printf("Fehler bei der Eingabe!\n");
             return 1;
         }
-        // !TODO: Delete clrscr() and definitions
-	clrscr();
+	    clrscr();
 
         // Switch Anweisung
         switch (choice) {
