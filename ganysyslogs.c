@@ -52,7 +52,7 @@
 /* Routine to clear the screen */
 #ifdef __unix__
     #define clrscr() printf("\x1B[2J")
-#elif __APPLE__
+#elif __APPLE__ || _AIX
     #define clrscr() printf("\x1B[2J")
 #elif __BORLANDC__ && __MSDOS__
     #include <conio.h>
