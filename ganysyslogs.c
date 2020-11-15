@@ -115,9 +115,9 @@ int main(int argc, const char **argv) {
                             printf("Input Error!\n");
                             exit(EXIT_FAILURE);
                         }
-                        nHosts += more;
-                        routers = (char **)realloc(routers, nHosts * sizeof(char *));
-                        addRouters(routers, nHosts, more);
+                        routers = (char **)realloc(routers, (nHosts + more) * sizeof(char *));
+                        addRouters(routers, (nHosts + more), more);     /* 2nd param: Total amount of routers after realloc(); 3rd param: How many to add */ 
+                        nHosts += more;     /* Only sum up to new array-length (nHosts), if realloc was successful */
                     }
             break;
             case 2: routers = deleteRouters(routers, &nHosts);
