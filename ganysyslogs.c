@@ -48,6 +48,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>     //!< for getlogin()
 
 /* Conditional compiling options for clear screen command*/
 #ifdef __unix__
@@ -62,6 +63,7 @@
     #define clrscr() printf("clrscr() - Fehler!!\n") 
 #endif
 
+#define POSIX_SOURCE    //!< for getlogin()
 #define SENTINEL 7      // Determines which option can quit the program
 
 /* CONSTANTS */
@@ -77,10 +79,15 @@ int createCronJob();
 void showRouters(char *arr[], int n);
 
 int main(int argc, const char **argv) {
-  char **routers = NULL; /*!< Array of monitored devices */
+    char **routers = NULL; /*!< Array of monitored devices */
     int choice = 0, nHosts = 0, more = 0; //!< Option-Switch, number of monitored devices, number of additional devices
+    char *user;
 
-    clrscr();
+    if ((user = getlogin()) == NULL)
+    perror("__getlogin1() error");
+    else printf("__getlogin1() returned %s\n", user);
+
+    // clrscr();
     printf("\n\tGANYSYSLOGS: TOOL TO IDENTIFY NEW SYSLOG MESSAGES\n");
     printf("\t-------------------------------------------------\n");
 
