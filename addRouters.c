@@ -5,6 +5,7 @@
 void addRouters(char *devices[], int n, int more) {
     char hostName[20];
     int i = 0;
+    
     for (i=n-more; i < n; ++i) {
         printf("%d. Hostname: ", i+1);
         if ( (scanf("%s[^\n]", hostName) != 1) ) {
