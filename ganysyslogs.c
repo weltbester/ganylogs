@@ -84,8 +84,8 @@ int main(int argc, const char **argv) {
     char *user;
 
     if ((user = getlogin()) == NULL)
-    perror("__getlogin1() error");
-    else printf("__getlogin1() returned %s\n", user);
+    perror("__getlogin() error");
+    else printf("Hallo %s\n", user);
 
     // clrscr();
     printf("\n\tGANYSYSLOGS: TOOL TO IDENTIFY NEW SYSLOG MESSAGES\n");
