@@ -75,6 +75,7 @@ extern char **enterRouters(int *groesse);
 extern void addRouters(char *devices[], int n, int more);
 extern char **deleteRouters(char *devices[], int *n);
 extern void append2list(void);
+extern void createHostlist(char *user);
 int createCronJob();
 void showRouters(char *arr[], int n);
 
@@ -83,11 +84,7 @@ int main(int argc, const char **argv) {
     int choice = 0, nHosts = 0, more = 0; //!< Option-Switch, number of monitored devices, number of additional devices
     char *user;
 
-    if ((user = getlogin()) == NULL)
-    perror("__getlogin() error");
-    else printf("Hallo %s\n", user);
-
-    // clrscr();
+    clrscr();
     printf("\n\tGANYSYSLOGS: TOOL TO IDENTIFY NEW SYSLOG MESSAGES\n");
     printf("\t-------------------------------------------------\n");
 
@@ -98,7 +95,7 @@ int main(int argc, const char **argv) {
         printf("\t-3- Show routers\n");
         printf("\t-4- Create cronjob\n");
         printf("\t-5- Enter syslog signature to 'black-' or 'whitelist'\n");
-        printf("\t-6- vakant\n");
+        printf("\t-6- Create Hostlist\n");
         printf("\t-7- Quit\n\n");
 
         printf("Your choice: ");
@@ -141,7 +138,11 @@ int main(int argc, const char **argv) {
                     clrscr();
             break;
             // Enter syslog signature to 'whitelist'
-            case 6: printf("Vakant!\n");
+            case 6: if ((user = getlogin()) == NULL) {
+                        perror("__getlogin() error");
+                    }
+                    char *test = "bert.brot";
+                    createHostlist(test);
             break;
             case SENTINEL:  printf("Wirsing!\n");
                             if (NULL != routers) {
