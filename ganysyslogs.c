@@ -64,7 +64,7 @@
 #endif
 
 #define POSIX_SOURCE    //!< for getlogin()
-#define SENTINEL 7      // Determines which option can quit the program
+#define SENTINEL 6      // Determines which option can quit the program
 
 /* CONSTANTS */
 
@@ -75,15 +75,30 @@ extern char **enterRouters(int *groesse);
 extern void addRouters(char *devices[], int n, int more);
 extern char **deleteRouters(char *devices[], int *n);
 extern void append2list(void);
-extern void createHostlist(char *user);
+extern void createHostlist(FILE *fp);
 int createCronJob();
-void showRouters(char *arr[], int n);
+void showRouters(FILE *fp);
 
 int main(int argc, const char **argv) {
+    FILE *fp = NULL;
     char **routers = NULL; /*!< Array of monitored devices */
-    int choice = 0, nHosts = 0, more = 0; //!< Option-Switch, number of monitored devices, number of additional devices
-    char *user;
+    int choice = 0, nHosts = 0; //!< Option-Switch, number of monitored devices, number of additional devices
+    char user[7] = "gp", listName[31];
 
+    /*!< Open user-specific hostfile */
+    /*
+    if ((user = getlogin()) == NULL) {
+        perror("__getlogin() error");
+    } */
+    strcpy(listName, user);
+    strcat(listName, "_hosts.txt");
+    fp = fopen(listName, "a+");
+    if (fp == NULL) {
+        printf("Cannot open file!\n");
+        exit(EXIT_FAILURE);
+    }
+
+    /*!< Menue */
     clrscr();
     printf("\n\tGANYSYSLOGS: TOOL TO IDENTIFY NEW SYSLOG MESSAGES\n");
     printf("\t-------------------------------------------------\n");
@@ -95,8 +110,7 @@ int main(int argc, const char **argv) {
         printf("\t-3- Show routers\n");
         printf("\t-4- Create cronjob\n");
         printf("\t-5- Enter syslog signature to 'black-' or 'whitelist'\n");
-        printf("\t-6- Create Hostlist\n");
-        printf("\t-7- Quit\n\n");
+          printf("\t-6- Quit\n\n");
 
         printf("Your choice: ");
         if ( (scanf("%d", &choice) != 1) ) {
@@ -108,27 +122,13 @@ int main(int argc, const char **argv) {
         // Switch Anweisung
         switch (choice) {
             // Enter routers
-            case 1: if (NULL == routers) {
-                        routers = enterRouters(&nHosts);
-                        if (NULL == routers) {
-                            return 1;
-                        }
-                    } else {
-                        printf("How many routers to add to existing %d routers? ", nHosts);
-                        if ( (scanf("%d", &more) != 1)) {
-                            printf("Input Error!\n");
-                            exit(EXIT_FAILURE);
-                        }
-                        routers = (char **)realloc(routers, (nHosts + more) * sizeof(char *));
-                        addRouters(routers, (nHosts + more), more);     /* 2nd param: Total amount of routers after realloc(); 3rd param: How many to add */ 
-                        nHosts += more;     /* Only sum up to new array-length (nHosts), if realloc was successful */
-                    }
+            case 1: createHostlist(fp);
             break;
             case 2: routers = deleteRouters(routers, &nHosts);
                     printf("%d router(s) deleted.\n", nHosts);
             break;
             // Display entered routers
-            case 3: showRouters(routers, nHosts);
+            case 3: showRouters(fp);
             break;
             // Create cronjob
             case 4: createCronJob();
@@ -138,12 +138,6 @@ int main(int argc, const char **argv) {
                     clrscr();
             break;
             // Enter syslog signature to 'whitelist'
-            case 6: if ((user = getlogin()) == NULL) {
-                        perror("__getlogin() error");
-                    }
-                    char *test = "bert.brot";
-                    createHostlist(test);
-            break;
             case SENTINEL:  printf("Wirsing!\n");
                             if (NULL != routers) {
                                 free(routers);
@@ -154,25 +148,18 @@ int main(int argc, const char **argv) {
             break;
         }
     } while (choice != SENTINEL);
+    fclose(fp);
     
   return EXIT_SUCCESS;
 }
-void showRouters(char *arr[], int n) {
-    int i = 0;
-    if (NULL == arr) {
-        printf("No routers entered\n");
-    } else {
-        printf("\nAdded routers: ");
-        printf("[");
-        for (i=0; i < n; ++i) {
-            if (i == 0) {
-                printf("%s", arr[i]);
-            } else {
-                printf(", %s", arr[i]);
-            } 
-        }
-        printf("]\n\n");
-    }    
+void showRouters(FILE *fp) {
+    char hostname[12]; // check length at createHostlist
+    fseek(fp, 0, SEEK_SET);
+    printf("Router list: [");
+    while ( (fscanf(fp, "%s", hostname) != EOF)) {
+        printf("%s ", hostname);
+    }
+    printf("]\n\n");    
     return;
 }
 /*
