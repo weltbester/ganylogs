@@ -2,12 +2,17 @@
 #include <stdlib.h>
 
 void showHostNames(FILE *fp) {
-    char hostname[12]; // check length at createHostlist
-    fseek(fp, 0, SEEK_SET);
-    printf("Router list: [");
-    while ( (fscanf(fp, "%s", hostname) != EOF)) {
-        printf("%s ", hostname);
+    if (NULL == fp) {
+        printf("Create a hostlist first!\n");
+        return;
+    } else {
+        char hostname[10];
+        fseek(fp, 0, SEEK_SET);
+        printf("Router list: [");
+        while ( (fscanf(fp, "%s", hostname) != EOF)) {
+            printf("%s ", hostname);
+        }
+        printf("]\n\n");    
+        return;
     }
-    printf("]\n\n");    
-    return;
 }

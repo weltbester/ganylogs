@@ -80,8 +80,7 @@ extern void append2list(void);
 
 int main(int argc, const char **argv) {
     FILE *fp = NULL;
-    char **routers = NULL; /*!< Array of monitored devices */
-    int choice = 0, nHosts = 0; //!< Option-Switch, number of monitored devices, number of additional devices
+    int choice = 0; //!< Option-Switch, number of monitored devices, number of additional devices
     char user[7] = "gp", listName[31];
 
     /*!< Open user-specific hostfile */
@@ -106,7 +105,7 @@ int main(int argc, const char **argv) {
         putchar('\n');
         printf("\t-1- Enter/add routers\n");
         printf("\t-2- Show routers\n");
-        printf("\t-3- Delete all routers\n");
+        printf("\t-3- Delete hostlist\n");
         printf("\t-4- Create cronjob\n");
         printf("\t-5- Enter syslog signature to 'black-' or 'whitelist'\n");
           printf("\t-6- Quit\n\n");
@@ -123,10 +122,11 @@ int main(int argc, const char **argv) {
             // Enter routers
             case 1: createHostlist(fp);
             break;
+            // Display entered routers
             case 2: showHostNames(fp);
             break;
-            // Display entered routers
-            case 3: deleteHostList(fp, listName);
+            // Delete hostfile
+            case 3: deleteHostList(fp, listName); fp = NULL;;
             break;
             // Create cronjob
             case 4: createCronJob();
@@ -137,16 +137,15 @@ int main(int argc, const char **argv) {
             break;
             // Enter syslog signature to 'whitelist'
             case SENTINEL:  printf("Wirsing!\n");
-                            if (NULL != routers) {
-                                free(routers);
-                                routers = NULL;
-                            }
             break;
             default: printf("Valid options: 1 - %d\n\n", SENTINEL);
             break;
         }
     } while (choice != SENTINEL);
-    fclose(fp);
+    if (NULL != fp) {
+        fclose(fp);
+    }
+    /*!TODO: eventually close 'fp' here */
     
   return EXIT_SUCCESS;
 }
