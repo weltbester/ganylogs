@@ -73,11 +73,10 @@
 /* PROTOTYPES */
 extern void createHostlist(FILE *fp);
 extern void showHostNames(FILE *fp) ;
-extern char **deleteRouters(char *devices[], int *n);
+extern int deleteHostList(FILE *fp, char *file);
 int createCronJob();
 extern void append2list(void);
-// extern char **enterRouters(int *groesse);
-// extern void addRouters(char *devices[], int n, int more);
+
 
 int main(int argc, const char **argv) {
     FILE *fp = NULL;
@@ -127,8 +126,7 @@ int main(int argc, const char **argv) {
             case 2: showHostNames(fp);
             break;
             // Display entered routers
-            case 3: routers = deleteRouters(routers, &nHosts);
-                    printf("%d router(s) deleted.\n", nHosts);
+            case 3: deleteHostList(fp, listName);
             break;
             // Create cronjob
             case 4: createCronJob();
