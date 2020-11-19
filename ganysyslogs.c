@@ -120,13 +120,29 @@ int main(int argc, const char **argv) {
         // Switch Anweisung
         switch (choice) {
             // Enter routers
-            case 1: createHostlist(fp);
+            case 1: if (fp == NULL) {
+                        fp = fopen(listName, "a+");
+                        if (NULL == fp) {
+                            printf("Cannot open file '%s'.\n", listName);
+                            exit(EXIT_FAILURE);
+                        }
+                    }
+                    createHostlist(fp);
             break;
             // Display entered routers
             case 2: showHostNames(fp);
             break;
             // Delete hostfile
-            case 3: deleteHostList(fp, listName); fp = NULL;;
+            case 3: // deleteHostList(fp, listName); fp = NULL;
+                    if (fp != NULL) {
+                        
+                        remove(listName);
+                        // fclose(fp);
+                        fp = NULL;
+                        printf("Hostlist %s deleted!\n", listName);
+                    } else {
+                        printf("Nothing to delete!\n");
+                    }
             break;
             // Create cronjob
             case 4: createCronJob();
@@ -142,7 +158,7 @@ int main(int argc, const char **argv) {
             break;
         }
     } while (choice != SENTINEL);
-    if (NULL != fp) {
+    if (fp != NULL) {
         fclose(fp);
     }
     /*!TODO: eventually close 'fp' here */
