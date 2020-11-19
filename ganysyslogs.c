@@ -71,13 +71,13 @@
 /* STRUCTS */
 
 /* PROTOTYPES */
+extern void createHostlist(FILE *fp);
+void showRouters(FILE *fp);
+extern char **deleteRouters(char *devices[], int *n);
+int createCronJob();
+extern void append2list(void);
 extern char **enterRouters(int *groesse);
 extern void addRouters(char *devices[], int n, int more);
-extern char **deleteRouters(char *devices[], int *n);
-extern void append2list(void);
-extern void createHostlist(FILE *fp);
-int createCronJob();
-void showRouters(FILE *fp);
 
 int main(int argc, const char **argv) {
     FILE *fp = NULL;
@@ -106,8 +106,8 @@ int main(int argc, const char **argv) {
     do {
         putchar('\n');
         printf("\t-1- Enter/add routers\n");
-        printf("\t-2- Delete all routers\n");
-        printf("\t-3- Show routers\n");
+        printf("\t-2- Show routers\n");
+        printf("\t-3- Delete all routers\n");
         printf("\t-4- Create cronjob\n");
         printf("\t-5- Enter syslog signature to 'black-' or 'whitelist'\n");
           printf("\t-6- Quit\n\n");
@@ -124,11 +124,11 @@ int main(int argc, const char **argv) {
             // Enter routers
             case 1: createHostlist(fp);
             break;
-            case 2: routers = deleteRouters(routers, &nHosts);
-                    printf("%d router(s) deleted.\n", nHosts);
+            case 2: showRouters(fp);
             break;
             // Display entered routers
-            case 3: showRouters(fp);
+            case 3: routers = deleteRouters(routers, &nHosts);
+                    printf("%d router(s) deleted.\n", nHosts);
             break;
             // Create cronjob
             case 4: createCronJob();
