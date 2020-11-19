@@ -72,12 +72,12 @@
 
 /* PROTOTYPES */
 extern void createHostlist(FILE *fp);
-void showRouters(FILE *fp);
+extern void showHostNames(FILE *fp) ;
 extern char **deleteRouters(char *devices[], int *n);
 int createCronJob();
 extern void append2list(void);
-extern char **enterRouters(int *groesse);
-extern void addRouters(char *devices[], int n, int more);
+// extern char **enterRouters(int *groesse);
+// extern void addRouters(char *devices[], int n, int more);
 
 int main(int argc, const char **argv) {
     FILE *fp = NULL;
@@ -124,7 +124,7 @@ int main(int argc, const char **argv) {
             // Enter routers
             case 1: createHostlist(fp);
             break;
-            case 2: showRouters(fp);
+            case 2: showHostNames(fp);
             break;
             // Display entered routers
             case 3: routers = deleteRouters(routers, &nHosts);
@@ -151,16 +151,6 @@ int main(int argc, const char **argv) {
     fclose(fp);
     
   return EXIT_SUCCESS;
-}
-void showRouters(FILE *fp) {
-    char hostname[12]; // check length at createHostlist
-    fseek(fp, 0, SEEK_SET);
-    printf("Router list: [");
-    while ( (fscanf(fp, "%s", hostname) != EOF)) {
-        printf("%s ", hostname);
-    }
-    printf("]\n\n");    
-    return;
 }
 /*
  * A C program is not a script; it is source code that must be compiled before use.
