@@ -11,13 +11,3 @@ int deleteHostList(FILE *fp, char *file) {
     }
     return EXIT_SUCCESS;
 }
-/*
-if (fp != NULL) {
-                        
-                        remove(listName);
-                        // fclose(fp);
-                        fp = NULL;
-                        printf("Hostlist %s deleted!\n", listName);
-                    } else {
-                        printf("Nothing to delete!\n");
-                    } */
