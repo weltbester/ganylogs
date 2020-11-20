@@ -3,9 +3,8 @@
 
 int deleteHostList(FILE *fp, char *file) {
     if (fp != NULL) {
-        // fclose(fp);
+        fclose(fp);
         remove(file);
-        //fp = NULL;
         printf("Hostlist %s deleted!\n", file);
     } else {
         printf("Nothing to delete!\n");
