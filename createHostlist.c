@@ -6,6 +6,10 @@ void createHostlist(FILE *fp) {
     char hostname[10];
     int groesse = 0;
 
+    /* !TODO: Check if list contains already entries,
+        count entries and proceed with ongoing number
+        when entering addtional routers on a second call */
+        
     printf("How many routers to enter? ");
     if ( (scanf("%d", &groesse) != 1)) {
         printf("Input Error!\n");
