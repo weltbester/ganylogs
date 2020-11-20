@@ -90,11 +90,11 @@ int main(int argc, const char **argv) {
     } */
     strcpy(listName, user);
     strcat(listName, "_hosts.txt");
-    fp = fopen(listName, "a+");
+    /* fp = fopen(listName, "a+");
     if (fp == NULL) {
         printf("Cannot open file!\n");
         exit(EXIT_FAILURE);
-    }
+    } */
 
     /*!< Menue */
     clrscr();
