@@ -133,16 +133,7 @@ int main(int argc, const char **argv) {
             case 2: showHostNames(fp);
             break;
             // Delete hostfile
-            case 3: // deleteHostList(fp, listName); fp = NULL;
-                    if (fp != NULL) {
-                        
-                        remove(listName);
-                        // fclose(fp);
-                        fp = NULL;
-                        printf("Hostlist %s deleted!\n", listName);
-                    } else {
-                        printf("Nothing to delete!\n");
-                    }
+            case 3: deleteHostList(fp, listName); fp = NULL;
             break;
             // Create cronjob
             case 4: createCronJob();
