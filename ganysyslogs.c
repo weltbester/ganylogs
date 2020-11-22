@@ -1,3 +1,6 @@
+/// Brief ganysyslog description.
+///
+/// Here comes more...
 /*! @brief Tool to identify new syslog messages */
 /**
  * 

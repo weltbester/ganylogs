@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+/// Data size of one entry in hostlist.
 #define DS 11
 
 void createHostlist(FILE *fp) {
@@ -28,4 +29,5 @@ void createHostlist(FILE *fp) {
         fprintf(fp, "%-10s\n", hostname); // '%-10s' to be conform with DS
     }
     return;
-}   
+}
+   
