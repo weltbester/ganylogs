@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['enterrouters',['enterRouters',['../enter_routers_8c.html#afb834858f2eb1fc2715d98df09ee8b03',1,'enterRouters(int *groesse):&#160;enterRouters.c'],['../ganysyslogs_8c.html#afb834858f2eb1fc2715d98df09ee8b03',1,'enterRouters(int *groesse):&#160;enterRouters.c']]]
+  ['deletehostlist',['deleteHostList',['../delete_host_list_8c.html#a883a01833404b539a610fcd771970c53',1,'deleteHostList(FILE *fp, char *file):&#160;deleteHostList.c'],['../ganysyslogs_8c.html#a883a01833404b539a610fcd771970c53',1,'deleteHostList(FILE *fp, char *file):&#160;deleteHostList.c']]]
 ];

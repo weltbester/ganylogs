@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['showrouters',['showRouters',['../ganysyslogs_8c.html#a03bacbd7544e387585dbba5168ed0e99',1,'ganysyslogs.c']]]
+  ['showhostnames',['showHostNames',['../ganysyslogs_8c.html#a3f50841657c2700d6f9ab7efd7323c20',1,'showHostNames(FILE *fp):&#160;showHostNames.c'],['../show_host_names_8c.html#a3f50841657c2700d6f9ab7efd7323c20',1,'showHostNames(FILE *fp):&#160;showHostNames.c']]]
 ];

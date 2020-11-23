@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sentinel',['SENTINEL',['../ganysyslogs_8c.html#af2af475b85aef66019c417d8ded1c435',1,'ganysyslogs.c']]]
+  ['clrscr',['clrscr',['../ganysyslogs_8c.html#ada0430ff0133c72d1ab38ca336610f5a',1,'ganysyslogs.c']]]
 ];

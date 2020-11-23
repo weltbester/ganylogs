@@ -11,3 +11,4 @@ int deleteHostList(FILE *fp, char *file) {
     }
     return EXIT_SUCCESS;
 }
+
