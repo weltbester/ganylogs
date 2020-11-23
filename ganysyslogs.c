@@ -88,6 +88,14 @@ int main(int argc, const char **argv) {
     if ((user = getlogin()) == NULL) {
         perror("__getlogin() error");
     } */
+
+    // strcpy(listName, "/home/mj/router_liste.txt");
+    strcpy(listName, user);
+    strcat(listName, "_hosts.txt");
+    fp = fopen(listName, "a+");
+
+
+
     strcpy(listName, user);
     strcat(listName, "_hosts.txt");
     
@@ -131,13 +139,17 @@ int main(int argc, const char **argv) {
             case 3: deleteHostList(fp, listName); fp = NULL;
             break;
             // Create cronjob
-            case 4: createCronJob();
+            case 4: printf("Open crontab at terminal with 'crontab -e' and add ('i') the following command:\n\n\t"
+                          "0   7  *   *  * /home/gp/skripte/dsr_sh_module\n\n"
+                          "Then close crontab file with 'ESC', 'wq', ENTER\n\n");
+                          
+                          // createCronJob();
             break;
             // Enter syslog signature to 'blacklist'
             case 5: append2list();
                     clrscr();
             break;
-            // Enter syslog signature to 'whitelist'
+            // Quit program
             case SENTINEL:  printf("Wirsing!\n");
             break;
             default: printf("Valid options: 1 - %d\n\n", SENTINEL);

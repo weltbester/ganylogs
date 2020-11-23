@@ -7,12 +7,7 @@
 void createHostlist(FILE *fp) {
     char hostname[10];
     int groesse = 0, offset = 0;
-    /* !TODO: Check if list contains already entries,
-        count entries and proceed with ongoing number
-        when entering addtional routers on a second call
-
-        Try to solve it with FSEEK_END and ftell and Data-size (DS)
-    */
+    
     fseek(fp, 0, SEEK_END);
     offset = (int)ftell(fp) / DS;
 
