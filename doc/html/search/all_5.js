@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['posix_5fsource',['POSIX_SOURCE',['../ganysyslogs_8c.html#a7a18041017fee1662c2c835d151cb636',1,'ganysyslogs.c']]]
+  ['logfile_2etxt_13',['logfile.txt',['../logfile_8txt.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['readme_2emd',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]]
+  ['main_14',['main',['../ganysyslogs_8c.html#a217dbf8b442f20279ea00b898af96f52',1,'ganysyslogs.c']]]
 ];

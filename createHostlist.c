@@ -14,14 +14,14 @@ void createHostlist(FILE *fp) {
 
     printf("How many routers to enter? ");
     if ( (scanf("%d", &groesse) != 1)) {
-        printf("Input Error, expected integer number!\n");
-        exit(EXIT_FAILURE);
+      printf("Input Error, expected integer number!\n");
+      exit(EXIT_FAILURE);
     }
     groesse += offset;
     for (int i = offset; i < groesse; ++i) {
         printf("%d. Router: ", i+1);
         scanf("%s", hostname);
-        fprintf(fp, "%-10s\n", hostname); // '%-10s' to be conform with DS
+        fprintf(fp, "%-10s\n", hostname); // '%-10s' to be conform with DS 11 (ten characters + '\0')
     }
     return;
 }

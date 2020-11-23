@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['main',['main',['../ganysyslogs_8c.html#a217dbf8b442f20279ea00b898af96f52',1,'ganysyslogs.c']]]
+  ['ganysyslogs_2ec_11',['ganysyslogs.c',['../ganysyslogs_8c.html',1,'']]],
+  ['ganysyslogs_12',['ganysyslogs',['../md___users_georgpohl__nextcloud__programming_c_ganysyslogs__r_e_a_d_m_e.html',1,'']]]
 ];

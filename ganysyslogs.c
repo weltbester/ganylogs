@@ -109,12 +109,12 @@ int main(int argc, const char **argv) {
 
     do {
         putchar('\n');
-        printf("\t-1- Enter/add routers\n");
-        printf("\t-2- Show routers\n");
-        printf("\t-3- Delete hostlist\n");
-        printf("\t-4- Create cronjob\n");
-        printf("\t-5- Enter syslog signature to 'black-' or 'whitelist'\n");
-          printf("\t-6- Quit\n\n");
+        printf("\t-1- Enter/add routers\n\n");
+        printf("\t-2- Show routers\n\n");
+        printf("\t-3- Delete hostlist\n\n");
+        printf("\t-4- Create cronjob\n\n");
+        printf("\t-5- Enter syslog signature to 'black-' or 'whitelist'\n\n");
+        printf("\t-6- Quit\n\n\n");
 
         printf("Your choice: ");
         if ( (scanf("%d", &choice) != 1) ) {
