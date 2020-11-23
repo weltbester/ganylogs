@@ -144,7 +144,7 @@ int main(int argc, const char **argv) {
             // Create cronjob
             case 4: printf("Open crontab at terminal with 'crontab -e' and add ('i') the following command:\n\n\t"
                           "0   7  *   *  * /home/gp/skripte/dsr_sh_module\n\n"
-                          "Then close crontab file with 'ESC', 'wq', ENTER\n\n");
+                          "Then close crontab file with 'ESC', 'wq', 'ENTER'\n\n");
                           
                           // createCronJob();
             break;
