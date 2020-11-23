@@ -14,7 +14,7 @@ void createHostlist(FILE *fp) {
 
     printf("How many routers to enter? ");
     if ( (scanf("%d", &groesse) != 1)) {
-        printf("Input Error!\n");
+        printf("Input Error, expected integer number!\n");
         exit(EXIT_FAILURE);
     }
     groesse += offset;
