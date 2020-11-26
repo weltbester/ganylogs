@@ -1,50 +1,57 @@
-\hypertarget{ganysyslogs_8c}{}\section{/\+Users/georg/\+Nextcloud/\+Programming/c/ganysyslogs/ganysyslogs.c File Reference}
-\label{ganysyslogs_8c}\index{/Users/georg/Nextcloud/Programming/c/ganysyslogs/ganysyslogs.c@{/Users/georg/Nextcloud/Programming/c/ganysyslogs/ganysyslogs.c}}
+\hypertarget{ganysyslogs_8c}{}\section{ganysyslogs.\+c File Reference}
+\label{ganysyslogs_8c}\index{ganysyslogs.c@{ganysyslogs.c}}
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{ganysyslogs_8c_af2af475b85aef66019c417d8ded1c435}{S\+E\+N\+T\+I\+N\+EL}}~8
-\begin{DoxyCompactList}\small\item\em Tool to identify new syslog messages. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\#define \mbox{\hyperlink{ganysyslogs_8c_ada0430ff0133c72d1ab38ca336610f5a}{clrscr}}()~printf(\char`\"{}clrscr() -\/ Fehler!!\textbackslash{}n\char`\"{})
+\begin{DoxyCompactList}\small\item\em Brief ganysyslog description. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{ganysyslogs_8c_a7a18041017fee1662c2c835d151cb636}{P\+O\+S\+I\+X\+\_\+\+S\+O\+U\+R\+CE}}
+\begin{DoxyCompactList}\small\item\em for getlogin() \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{ganysyslogs_8c_af2af475b85aef66019c417d8ded1c435}{S\+E\+N\+T\+I\+N\+EL}}~6
+\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-char $\ast$$\ast$ \mbox{\hyperlink{ganysyslogs_8c_afb834858f2eb1fc2715d98df09ee8b03}{enter\+Routers}} (int $\ast$groesse)
+void \mbox{\hyperlink{ganysyslogs_8c_a6cab62dea664335f3e32d126c7e295ad}{create\+Hostlist}} (F\+I\+LE $\ast$fp)
 \item 
-void \mbox{\hyperlink{ganysyslogs_8c_a272fc61cfad3063b7d1f93d34b5a053f}{add\+Routers}} (char $\ast$devices\mbox{[}$\,$\mbox{]}, int n, int more)
+void \mbox{\hyperlink{ganysyslogs_8c_a3f50841657c2700d6f9ab7efd7323c20}{show\+Host\+Names}} (F\+I\+LE $\ast$fp)
 \item 
-char $\ast$$\ast$ \mbox{\hyperlink{ganysyslogs_8c_a5ccd8e8f9ec897600bd660d0b91c2c1f}{delete\+Routers}} (char $\ast$devices\mbox{[}$\,$\mbox{]}, int $\ast$n)
+int \mbox{\hyperlink{ganysyslogs_8c_a883a01833404b539a610fcd771970c53}{delete\+Host\+List}} (F\+I\+LE $\ast$fp, char $\ast$file)
+\item 
+int \mbox{\hyperlink{ganysyslogs_8c_a720f88439831cd4170ae7076bdeac21a}{create\+Cron\+Job}} ()
 \item 
 void \mbox{\hyperlink{ganysyslogs_8c_a8104259930e60c68ccfeafb7246ca6a7}{append2list}} (void)
-\item 
-void \mbox{\hyperlink{ganysyslogs_8c_a03bacbd7544e387585dbba5168ed0e99}{show\+Routers}} (char $\ast$arr\mbox{[}$\,$\mbox{]}, int n)
 \item 
 int \mbox{\hyperlink{ganysyslogs_8c_a217dbf8b442f20279ea00b898af96f52}{main}} (int argc, const char $\ast$$\ast$argv)
 \end{DoxyCompactItemize}
 
 
 \subsection{Macro Definition Documentation}
-\mbox{\Hypertarget{ganysyslogs_8c_af2af475b85aef66019c417d8ded1c435}\label{ganysyslogs_8c_af2af475b85aef66019c417d8ded1c435}} 
-\index{ganysyslogs.c@{ganysyslogs.c}!SENTINEL@{SENTINEL}}
-\index{SENTINEL@{SENTINEL}!ganysyslogs.c@{ganysyslogs.c}}
-\subsubsection{\texorpdfstring{SENTINEL}{SENTINEL}}
-{\footnotesize\ttfamily \#define S\+E\+N\+T\+I\+N\+EL~8}
+\mbox{\Hypertarget{ganysyslogs_8c_ada0430ff0133c72d1ab38ca336610f5a}\label{ganysyslogs_8c_ada0430ff0133c72d1ab38ca336610f5a}} 
+\index{ganysyslogs.c@{ganysyslogs.c}!clrscr@{clrscr}}
+\index{clrscr@{clrscr}!ganysyslogs.c@{ganysyslogs.c}}
+\subsubsection{\texorpdfstring{clrscr}{clrscr}}
+{\footnotesize\ttfamily \#define clrscr(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~printf(\char`\"{}clrscr() -\/ Fehler!!\textbackslash{}n\char`\"{})}
 
 
 
-Tool to identify new syslog messages. 
+Brief ganysyslog description. 
 
-File\+: \mbox{\hyperlink{ganysyslogs_8c}{ganysyslogs.\+c}}
+Here comes more...
 
-Author\+: Georg Pohl, 70174 Stuttgart
+Tool to identify new syslog messages File\+: \mbox{\hyperlink{ganysyslogs_8c}{ganysyslogs.\+c}}
+
+Author\+: Manfred Jaede \& Georg Pohl, 70174 Stuttgart
 
 Create date\+: 8th of November 2020
 
 Version\+: 1.\+0
 
-Last Change\+: 8th of November 2020
+Last Change\+: 13th of November 2020
 
 
 
@@ -63,32 +70,48 @@ Every message is then compared with the \textquotesingle{}blacklist\textquotesin
 
 \textquotesingle{}whitelist\textquotesingle{}\+: contains log messages which are importand and have to be transferred to the \char`\"{}\+M\+O\+N\+I\+T\+O\+R\+I\+N\+G S\+Y\+S\+T\+E\+M\char`\"{}.
 
-Copyright (C) 2020 C\+AN Georg Pohl 
+Copyright (C) 2020 Manfred Jaede, C\+AN Georg Pohl$<$ for getlogin() \mbox{\Hypertarget{ganysyslogs_8c_a7a18041017fee1662c2c835d151cb636}\label{ganysyslogs_8c_a7a18041017fee1662c2c835d151cb636}} 
+\index{ganysyslogs.c@{ganysyslogs.c}!POSIX\_SOURCE@{POSIX\_SOURCE}}
+\index{POSIX\_SOURCE@{POSIX\_SOURCE}!ganysyslogs.c@{ganysyslogs.c}}
+\subsubsection{\texorpdfstring{POSIX\_SOURCE}{POSIX\_SOURCE}}
+{\footnotesize\ttfamily \#define P\+O\+S\+I\+X\+\_\+\+S\+O\+U\+R\+CE}
+
+
+
+for getlogin() 
+
+\mbox{\Hypertarget{ganysyslogs_8c_af2af475b85aef66019c417d8ded1c435}\label{ganysyslogs_8c_af2af475b85aef66019c417d8ded1c435}} 
+\index{ganysyslogs.c@{ganysyslogs.c}!SENTINEL@{SENTINEL}}
+\index{SENTINEL@{SENTINEL}!ganysyslogs.c@{ganysyslogs.c}}
+\subsubsection{\texorpdfstring{SENTINEL}{SENTINEL}}
+{\footnotesize\ttfamily \#define S\+E\+N\+T\+I\+N\+EL~6}
+
+
 
 \subsection{Function Documentation}
-\mbox{\Hypertarget{ganysyslogs_8c_a272fc61cfad3063b7d1f93d34b5a053f}\label{ganysyslogs_8c_a272fc61cfad3063b7d1f93d34b5a053f}} 
-\index{ganysyslogs.c@{ganysyslogs.c}!addRouters@{addRouters}}
-\index{addRouters@{addRouters}!ganysyslogs.c@{ganysyslogs.c}}
-\subsubsection{\texorpdfstring{addRouters()}{addRouters()}}
-{\footnotesize\ttfamily void add\+Routers (\begin{DoxyParamCaption}\item[{char $\ast$}]{devices\mbox{[}$\,$\mbox{]},  }\item[{int}]{n,  }\item[{int}]{more }\end{DoxyParamCaption})}
-
 \mbox{\Hypertarget{ganysyslogs_8c_a8104259930e60c68ccfeafb7246ca6a7}\label{ganysyslogs_8c_a8104259930e60c68ccfeafb7246ca6a7}} 
 \index{ganysyslogs.c@{ganysyslogs.c}!append2list@{append2list}}
 \index{append2list@{append2list}!ganysyslogs.c@{ganysyslogs.c}}
 \subsubsection{\texorpdfstring{append2list()}{append2list()}}
 {\footnotesize\ttfamily void append2list (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{ganysyslogs_8c_a5ccd8e8f9ec897600bd660d0b91c2c1f}\label{ganysyslogs_8c_a5ccd8e8f9ec897600bd660d0b91c2c1f}} 
-\index{ganysyslogs.c@{ganysyslogs.c}!deleteRouters@{deleteRouters}}
-\index{deleteRouters@{deleteRouters}!ganysyslogs.c@{ganysyslogs.c}}
-\subsubsection{\texorpdfstring{deleteRouters()}{deleteRouters()}}
-{\footnotesize\ttfamily char$\ast$$\ast$ delete\+Routers (\begin{DoxyParamCaption}\item[{char $\ast$}]{devices\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{n }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{ganysyslogs_8c_a720f88439831cd4170ae7076bdeac21a}\label{ganysyslogs_8c_a720f88439831cd4170ae7076bdeac21a}} 
+\index{ganysyslogs.c@{ganysyslogs.c}!createCronJob@{createCronJob}}
+\index{createCronJob@{createCronJob}!ganysyslogs.c@{ganysyslogs.c}}
+\subsubsection{\texorpdfstring{createCronJob()}{createCronJob()}}
+{\footnotesize\ttfamily int create\+Cron\+Job (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{ganysyslogs_8c_afb834858f2eb1fc2715d98df09ee8b03}\label{ganysyslogs_8c_afb834858f2eb1fc2715d98df09ee8b03}} 
-\index{ganysyslogs.c@{ganysyslogs.c}!enterRouters@{enterRouters}}
-\index{enterRouters@{enterRouters}!ganysyslogs.c@{ganysyslogs.c}}
-\subsubsection{\texorpdfstring{enterRouters()}{enterRouters()}}
-{\footnotesize\ttfamily char$\ast$$\ast$ enter\+Routers (\begin{DoxyParamCaption}\item[{int $\ast$}]{groesse }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{ganysyslogs_8c_a6cab62dea664335f3e32d126c7e295ad}\label{ganysyslogs_8c_a6cab62dea664335f3e32d126c7e295ad}} 
+\index{ganysyslogs.c@{ganysyslogs.c}!createHostlist@{createHostlist}}
+\index{createHostlist@{createHostlist}!ganysyslogs.c@{ganysyslogs.c}}
+\subsubsection{\texorpdfstring{createHostlist()}{createHostlist()}}
+{\footnotesize\ttfamily void create\+Hostlist (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ganysyslogs_8c_a883a01833404b539a610fcd771970c53}\label{ganysyslogs_8c_a883a01833404b539a610fcd771970c53}} 
+\index{ganysyslogs.c@{ganysyslogs.c}!deleteHostList@{deleteHostList}}
+\index{deleteHostList@{deleteHostList}!ganysyslogs.c@{ganysyslogs.c}}
+\subsubsection{\texorpdfstring{deleteHostList()}{deleteHostList()}}
+{\footnotesize\ttfamily int delete\+Host\+List (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp,  }\item[{char $\ast$}]{file }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{ganysyslogs_8c_a217dbf8b442f20279ea00b898af96f52}\label{ganysyslogs_8c_a217dbf8b442f20279ea00b898af96f52}} 
 \index{ganysyslogs.c@{ganysyslogs.c}!main@{main}}
@@ -96,9 +119,15 @@ Copyright (C) 2020 C\+AN Georg Pohl
 \subsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{const char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{ganysyslogs_8c_a03bacbd7544e387585dbba5168ed0e99}\label{ganysyslogs_8c_a03bacbd7544e387585dbba5168ed0e99}} 
-\index{ganysyslogs.c@{ganysyslogs.c}!showRouters@{showRouters}}
-\index{showRouters@{showRouters}!ganysyslogs.c@{ganysyslogs.c}}
-\subsubsection{\texorpdfstring{showRouters()}{showRouters()}}
-{\footnotesize\ttfamily void show\+Routers (\begin{DoxyParamCaption}\item[{char $\ast$}]{arr\mbox{[}$\,$\mbox{]},  }\item[{int}]{n }\end{DoxyParamCaption})}
+$<$ Option-\/\+Switch, number of monitored devices, number of additional devices
+
+$<$ Open user-\/specific hostfile
+
+$<$ Menue
+
+T\+O\+DO\+: eventually close \textquotesingle{}fp\textquotesingle{} here \mbox{\Hypertarget{ganysyslogs_8c_a3f50841657c2700d6f9ab7efd7323c20}\label{ganysyslogs_8c_a3f50841657c2700d6f9ab7efd7323c20}} 
+\index{ganysyslogs.c@{ganysyslogs.c}!showHostNames@{showHostNames}}
+\index{showHostNames@{showHostNames}!ganysyslogs.c@{ganysyslogs.c}}
+\subsubsection{\texorpdfstring{showHostNames()}{showHostNames()}}
+{\footnotesize\ttfamily void show\+Host\+Names (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp }\end{DoxyParamCaption})}
 

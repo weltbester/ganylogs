@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['main',['main',['../ganysyslogs_8c.html#a217dbf8b442f20279ea00b898af96f52',1,'ganysyslogs.c']]]
+  ['ganysyslogs',['ganysyslogs',['../autotoc_md7.html',1,'']]],
+  ['ganysyslogs_2ec',['ganysyslogs.c',['../ganysyslogs_8c.html',1,'']]],
+  ['gp_5fhosts_2etxt',['gp_hosts.txt',['../gp__hosts_8txt.html',1,'']]]
 ];

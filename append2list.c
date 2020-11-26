@@ -1,6 +1,29 @@
+/**
+ * Copyright November 2020: Georg Pohl, 70174 Stuttgart
+ * File: append2list.c
+ * -------------------
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+/**
+ * Implementation notes: append2list(void)
+ * ---------------------------------------
+ * @brief Append syslog messages to a textfile.
+ * @param (void)
+ * @return (void)
+ *
+ * In this function you can append a syslog message
+ * signature to one of two existing syslogfiles - the blacklist
+ * or the whitelist - by chosing option 'b' or 'w', respectively.
+ *
+ * You can add more signatures (Y/y) or quit (N/n) the function.
+ * Deleting a syslog signature from a certain list is not possible.
+ * 
+ * Before all that a copy of the original textfile is made as a backup.
+ */
 
 void append2list(void) {
     FILE *fpList;
@@ -13,13 +36,13 @@ void append2list(void) {
     if ( scanf(" %c", &input) != 1 ) {
         printf("Input Error");
         exit(EXIT_FAILURE);
-    }                                                           /* Delete warnings */
+    }
     while ( input != 'w' && input != 'b') {
         printf("Only 'w' or 'b is allowed: ");
         if ( scanf(" %c", &input) != 1 ) {
             printf("Input Error");
             exit(EXIT_FAILURE);
-        }                                                         /* dito */
+        }
     }
 
     /* Make file backup before opening to the file */

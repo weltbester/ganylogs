@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['deleterouters_2ec',['deleteRouters.c',['../delete_routers_8c.html',1,'']]]
+  ['blacklist_2etxt',['blacklist.txt',['../blacklist_8txt.html',1,'']]]
 ];
