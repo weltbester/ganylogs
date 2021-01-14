@@ -28,7 +28,7 @@ You can find the markdown documentation [here](https://docs.github.com/en/free-p
 Make our network more **stable**!
 
 # License
-This software is Copyright © 1996-2020 Georg Pohl and CAN. It is free software, and may be redistributed under the terms specified in the LICENSE file.
+This software is Copyright © 1996-2021 Georg Pohl and CAN. It is free software, and may be redistributed under the terms specified in the LICENSE file.
 
 # About 'Company'
 unknown
