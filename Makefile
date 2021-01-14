@@ -1,6 +1,6 @@
 CC = gcc
-CFLAGS = -std=gnu99 -pedantic -Wall -Wwrite-strings -O3
-DBGFLAGS = -std=gnu99 -pedantic -Wall -Wwrite-strings -ggdb3 -DDEBUG
+CFLAGS = -std=c11 -pedantic -Wall -Wwrite-strings -O3
+DBGFLAGS = -std=c11 -pedantic -Wall -Wwrite-strings -ggdb3 -DDEBUG
 SRCS=$(wildcard *.c)
 OBJS=$(patsubst %.c,%.o,$(SRCS))
 DBGOBJS=$(patsubst %.c,%.dbg.o,$(SRCS))
@@ -18,5 +18,3 @@ depend:
 	makedepend $(SRCS)
 	makedepend -a -o .dbg.o  $(SRCS)
 # DO NOT DELETE
-anotherFile.o: anotherHeader.h someHeader.h
-oneFile.o: oneHeader.h someHeader.h

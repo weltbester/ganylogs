@@ -12,7 +12,7 @@
  *
  * Version: 1.0
  *
- * Last Change: 13th of November 2020
+ * Last Change: 27th of November 2020
  *
  * -----------------------------------
  * This program can be used to identify unknown syslog
@@ -56,7 +56,7 @@
 /* Conditional compiling options for clear screen command*/
 #ifdef __unix__
     #define clrscr() printf("\x1B[2J")
-#elif __APPLE__ || _AIX
+#elif __APPLE__ || _AIX			// Obsolete, was necessary for AIX UNIX
     #define clrscr() printf("\x1B[2J")
 #elif __BORLANDC__ && __MSDOS__
     #include <conio.h>
@@ -67,7 +67,7 @@
 #endif
 
 #define POSIX_SOURCE    //!< for getlogin()
-#define SENTINEL 6      // Determines which option can quit the program
+#define SENTINEL 7      // Determines which option can quit the program
 
 /* CONSTANTS */
 
@@ -78,29 +78,35 @@ extern void createHostlist(FILE *fp);
 extern void showHostNames(FILE *fp) ;
 extern int deleteHostList(FILE *fp, char *file);
 int createCronJob();
+extern int deleteCronJob();
 extern void append2list(void);
-
 
 int main(int argc, const char **argv) {
     FILE *fp = NULL;
     int choice = 0; //!< Option-Switch, number of monitored devices, number of additional devices
-    char user[7] = "gp", listName[31];
+    char *user, listName[63];
 
-    /*!< Open user-specific hostfile */
-    /*
+    /* Get username */
     if ((user = getlogin()) == NULL) {
         perror("__getlogin() error");
-    } */
+    }
+    if (strlen(user) < 3) {
+      printf("Program works on 'ispnmc' only!\n");
+      return  EXIT_FAILURE;
+    }
 
-    // strcpy(listName, "/home/mj/router_liste.txt");
-    strcpy(listName, user);
+    /*!< Open user-specific hostfile */
+    /* !TODO: provide user-related pathname to home directory, gp 2021-01-13 */
+    strcpy(listName, "/home/");
+    strcat(listName, user);
+    strcat(listName, "/");
+    strcat(listName, user);
     strcat(listName, "_hosts.txt");
     fp = fopen(listName, "a+");
-
-
-
-    strcpy(listName, user);
-    strcat(listName, "_hosts.txt");
+    if (NULL == fp) {
+      printf("Can not open file '%s'!\n", listName);
+      return EXIT_FAILURE;
+    }
     
     /*!< Menue */
     clrscr();
@@ -113,8 +119,9 @@ int main(int argc, const char **argv) {
         printf("\t-2- Show routers\n\n");
         printf("\t-3- Delete hostlist\n\n");
         printf("\t-4- Create cronjob\n\n");
-        printf("\t-5- Enter syslog signature to 'black-' or 'whitelist'\n\n");
-        printf("\t-6- Quit\n\n\n");
+	printf("\t-5- Delete cronjob\n\n");
+        printf("\t-6- Enter syslog signature to 'black-' or 'whitelist'\n\n");
+        printf("\t-7- Quit\n\n\n");
 
         printf("Your choice: ");
         if ( (scanf("%d", &choice) != 1) ) {
@@ -134,6 +141,7 @@ int main(int argc, const char **argv) {
                         }
                     }
                     createHostlist(fp);
+		    fclose(fp);
             break;
             // Display entered routers
             case 2: showHostNames(fp);
@@ -142,14 +150,12 @@ int main(int argc, const char **argv) {
             case 3: deleteHostList(fp, listName); fp = NULL;
             break;
             // Create cronjob
-            case 4: printf("Open crontab at terminal with 'crontab -e' and add ('i') the following command:\n\n\t"
-                          "0   7  *   *  * /home/gp/skripte/dsr_sh_module\n\n"
-                          "Then close crontab file with 'ESC', 'wq', 'ENTER'\n\n");
-                          
-                          // createCronJob();
+            case 4: createCronJob();
             break;
+	    case 5: deleteCronJob();
+	    break;
             // Enter syslog signature to 'blacklist'
-            case 5: append2list();
+            case 6: append2list();
                     clrscr();
             break;
             // Quit program
@@ -161,18 +167,6 @@ int main(int argc, const char **argv) {
     } while (choice != SENTINEL);
     if (fp != NULL) {
         fclose(fp);
-    }
-    /*!TODO: eventually close 'fp' here */
-    
+    }   
   return EXIT_SUCCESS;
 }
-/*
- * A C program is not a script; it is source code that must be compiled before use.
- * You can compile the program and then invoke it from cron with its (fully qualified) name.
- * For example, if you compile "test.c" to the executable "test", and place it in /usr/local/bin,
- * your cron entry would be:
- * 52 1 * * * /usr/local/bin/test
- * You should not place executables in the /etc directory; that is not where they belong.
- * The /etc directory is for configuration parameters. Executables should be placed in a bin directory.
- * Locally created executables that are available system-wide should be in /usr/local/bin/.
- */

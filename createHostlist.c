@@ -1,6 +1,6 @@
 /**
  * Copyright November 2020: Georg Pohl, 70174 Stuttgart
- * File: createHostlist.C
+ * File: createHostlist.c
  * ----------------------
  */
 
@@ -39,24 +39,33 @@
  * handling is done in main().
  */
 
+void dump_buffer(FILE *fp);
+
 void createHostlist(FILE *fp) {
     char hostname[10];
-    int groesse = 0, offset = 0;
+    int size = 0, offset = 0, n;
     
     fseek(fp, 0, SEEK_END);
     offset = (int)ftell(fp) / DS;
 
-    printf("How many routers to enter? ");
-    if ( (scanf("%d", &groesse) != 1)) {
-      printf("Input Error, expected integer number!\n");
-      exit(EXIT_FAILURE);
-    }
-    groesse += offset;
-    for (int i = offset; i < groesse; ++i) {
+    do {
+       printf("How many routers to enter? ");
+       n = scanf("%d", &size);
+       dump_buffer(stdin);
+    } while (n != 1 );
+    
+    size += offset;
+    for (int i = offset; i < size; ++i) {
         printf("%d. Router: ", i+1);
         scanf("%s", hostname);
         fprintf(fp, "%-10s\n", hostname); // '%-10s' to be conform with DS 11 (ten characters + '\0')
     }
     return;
 }
-   
+void dump_buffer(FILE *fp) {
+  int c = getchar();
+  while (c != '\n' && c != EOF) {
+    c = getchar();
+  }
+}
+
